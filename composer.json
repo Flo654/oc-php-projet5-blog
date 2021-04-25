@@ -6,5 +6,8 @@
             "email": "flo654@hotmail.com"
         }
     ],
-    "require": {}
+    "require-dev": {
+        "twig/twig": "^3.3",
+        "filp/whoops": "^2.12"
+    }
 }
