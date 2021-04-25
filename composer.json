@@ -1,0 +1,10 @@
+{
+    "name": "flo65/oc-php-projet5-blog",
+    "authors": [
+        {
+            "name": "Florent Ascensio",
+            "email": "flo654@hotmail.com"
+        }
+    ],
+    "require": {}
+}
