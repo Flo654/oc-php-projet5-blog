@@ -4,7 +4,11 @@ namespace App;
 
 use PDO;
 use PDOException;
+use Symfony\Component\Dotenv\Dotenv;
 
+
+$dotenv = new Dotenv();
+$dotenv->load(__DIR__.'/../.env');
 
 /**
  * connection to Database class
@@ -19,21 +23,7 @@ class Database
     private static $instance = null;
     
     
-    /**
-     * function that collect .env datas without using $_ENV
-     *
-     * @param int $info represents the key of the array that contains data
-     * @return string
-     */
-    private static function getEnvData($info) : string
-    {
-        $path = __DIR__.'/../.env';
-        $pathToStr = explode(",", preg_replace('/\s\s+/', ',', file_get_contents($path))); // separe les données recupéré dans le path
-        $data = preg_split("/[=]/", $pathToStr[$info]);
-        $donne = array_key_last($data);
-        $result = $data[$donne];
-        return $result;        
-    }
+   
 
     /**
      * function that connects to Database
@@ -43,11 +33,11 @@ class Database
     public static function getPDO() : PDO
     {
         if (self::$instance === null) {
-
-           $dbName = self::getEnvData(0);
-           $dbUser = self::getEnvData(1);
-           $dbPass = self::getEnvData(2);
-           $dbHost =self::getEnvData(3);
+            $envDatas = filter_var_array($_ENV, FILTER_SANITIZE_STRING);
+            $dbName = $envDatas['DB_NAME'];
+            $dbUser = $envDatas['DB_USER'];
+            $dbPass = $envDatas['DB_PASS'];
+            $dbHost = $envDatas['DB_HOST'];
                   
             try {
                                
