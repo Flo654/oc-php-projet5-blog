@@ -1,99 +1,120 @@
--- MySQL Workbench Forward Engineering
+-- phpMyAdmin SQL Dump
+-- version 5.0.2
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1:3306
+-- Généré le : jeu. 29 avr. 2021 à 07:14
+-- Version du serveur :  8.0.23
+-- Version de PHP : 7.4.9
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
-
--- -----------------------------------------------------
--- Schema blogDatabase
--- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema blogDatabase
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `blogDatabase` DEFAULT CHARACTER SET utf8 ;
-USE `blogDatabase` ;
-
--- -----------------------------------------------------
--- Table `blogDatabase`.`user`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `blogDatabase`.`user` (
-  `idUser` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(16) NOT NULL,
-  `email` VARCHAR(255) NOT NULL,
-  `password` VARCHAR(50) NOT NULL,
-  `isAdmin` TINYINT NOT NULL,
-  `createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` DATETIME NOT NULL,
-  PRIMARY KEY (`idUser`));
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
--- -----------------------------------------------------
--- Table `blogDatabase`.`category`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `blogDatabase`.`category` (
-  `idCategory` INT NOT NULL,
-  `name` VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`idCategory`));
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
+--
+-- Base de données : `blogdatabase`
+--
 
--- -----------------------------------------------------
--- Table `blogDatabase`.`article`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `blogDatabase`.`article` (
-  `idArticle` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `author` VARCHAR(45) NOT NULL,
-  `title` VARCHAR(45) NOT NULL,
-  `chapo` MEDIUMTEXT NOT NULL,
-  `urlImage` VARCHAR(100) NULL,
-  `content` LONGTEXT NOT NULL,
-  `readTime` TINYINT(3) NOT NULL,
-  `createdAt` DATE NOT NULL,
-  `updatedAt` DATE NOT NULL,
-  `idUser` INT UNSIGNED NOT NULL,
-  `idCategory` INT NOT NULL,
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `article`
+--
+
+DROP TABLE IF EXISTS `article`;
+CREATE TABLE IF NOT EXISTS `article` (
+  `idArticle` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `title` varchar(45) NOT NULL,
+  `chapo` mediumtext NOT NULL,
+  `urlImage` varchar(100) DEFAULT NULL,
+  `content` longtext NOT NULL,
+  `readTime` tinyint NOT NULL,
+  `createdAt` date NOT NULL,
+  `updatedAt` date NOT NULL,
+  `idUser` int UNSIGNED NOT NULL,
+  `idCategory` int NOT NULL,
   PRIMARY KEY (`idArticle`),
-  INDEX `fk_article_user1_idx` (`idUser` ASC),
-  INDEX `fk_article_category1_idx` (`idCategory` ASC),
-  CONSTRAINT `fk_article_user1`
-    FOREIGN KEY (`idUser`)
-    REFERENCES `blogDatabase`.`user` (`idUser`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_article_category1`
-    FOREIGN KEY (`idCategory`)
-    REFERENCES `blogDatabase`.`category` (`idCategory`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+  KEY `fk_article_user1_idx` (`idUser`),
+  KEY `fk_article_category1_idx` (`idCategory`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Table `blogDatabase`.`comment`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `blogDatabase`.`comment` (
-  `idComment` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `content` MEDIUMTEXT NOT NULL,
-  `createdAt` DATE NOT NULL,
-  `updatedAt` DATE NOT NULL,
-  `idArticle` INT UNSIGNED NOT NULL,
-  `idUser` INT UNSIGNED NOT NULL,
+--
+-- Structure de la table `category`
+--
+
+DROP TABLE IF EXISTS `category`;
+CREATE TABLE IF NOT EXISTS `category` (
+  `idCategory` int NOT NULL,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`idCategory`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `comment`
+--
+
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE IF NOT EXISTS `comment` (
+  `idComment` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `content` mediumtext NOT NULL,
+  `createdAt` date NOT NULL,
+  `updatedAt` date NOT NULL,
+  `idArticle` int UNSIGNED NOT NULL,
+  `idUser` int UNSIGNED NOT NULL,
   PRIMARY KEY (`idComment`),
-  INDEX `fk_comment_article_idx` (`idArticle` ASC),
-  INDEX `fk_comment_user1_idx` (`idUser` ASC),
-  CONSTRAINT `fk_comment_article`
-    FOREIGN KEY (`idArticle`)
-    REFERENCES `blogDatabase`.`article` (`idArticle`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_comment_user1`
-    FOREIGN KEY (`idUser`)
-    REFERENCES `blogDatabase`.`user` (`idUser`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+  KEY `fk_comment_article_idx` (`idArticle`),
+  KEY `fk_comment_user1_idx` (`idUser`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+--
+-- Structure de la table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
+  `idUser` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `username` varchar(16) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `isAdmin` tinyint NOT NULL,
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL,
+  PRIMARY KEY (`idUser`),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `article`
+--
+ALTER TABLE `article`
+  ADD CONSTRAINT `fk_article_category1` FOREIGN KEY (`idCategory`) REFERENCES `category` (`idCategory`),
+  ADD CONSTRAINT `fk_article_user1` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`);
+
+--
+-- Contraintes pour la table `comment`
+--
+ALTER TABLE `comment`
+  ADD CONSTRAINT `fk_comment_article` FOREIGN KEY (`idArticle`) REFERENCES `article` (`idArticle`),
+  ADD CONSTRAINT `fk_comment_user1` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
