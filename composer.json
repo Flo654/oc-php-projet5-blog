@@ -1,0 +1,19 @@
+{
+    "name": "flo65/oc-php-projet5-blog",
+    "description": "my php blog",
+    "authors": [
+        {
+            "name": "Florent Ascensio",
+            "email": "flo654@hotmail.com"
+        }
+    ],
+    "require-dev": {
+        "twig/twig": "^3.3",
+        "filp/whoops": "^2.12"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    }
+}
