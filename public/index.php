@@ -2,6 +2,7 @@
 
 use App\Database;
 
-require '../vendor/autoload.php';
+require_once '../vendor/autoload.php';
+
 
 Database::getPDO();

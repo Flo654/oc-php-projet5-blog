@@ -27,9 +27,9 @@ class Database
      */
     private static function getEnvData($info) : string
     {
-        $path = dirname(__DIR__, 1) . '/.env';
-        $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-        $data = preg_split("/[=]/", $lines[$info]);
+        $path = __DIR__.'/../.env';
+        $pathToStr = explode(",", preg_replace('/\s\s+/', ',', file_get_contents($path))); // separe les données recupéré dans le path
+        $data = preg_split("/[=]/", $pathToStr[$info]);
         $donne = array_key_last($data);
         $result = $data[$donne];
         return $result;        
@@ -50,11 +50,9 @@ class Database
            $dbHost =self::getEnvData(3);
                   
             try {
-                
-                
+                               
                 self::$instance = new PDO("mysql:dbname=$dbName;host=$dbHost", $dbUser, $dbPass );
-                
-
+                                
             } catch (PDOException $e) {
 
                 $e->getMessage();
