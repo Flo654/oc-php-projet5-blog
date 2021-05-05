@@ -13,7 +13,7 @@ $dotenv->load(__DIR__.'/../.env');
 /**
  * connection to Database class
  */
-class Database
+abstract class Database
 {
     /**
      * database connection instance
@@ -22,15 +22,12 @@ class Database
      */
     private static $instance = null;
     
-    
-   
-
     /**
      * function that connects to Database
      *
-     * @return PDO
+     * @return PDO|string
      */
-    public static function getPDO() : PDO
+    public static  function getPDO()
     {
         if (self::$instance === null) {
             $envDatas = filter_var_array($_ENV, FILTER_SANITIZE_STRING);
@@ -45,7 +42,7 @@ class Database
                                 
             } catch (PDOException $e) {
 
-                $e->getMessage();
+                return $e->getMessage();
             }    
             
         }
