@@ -32,7 +32,7 @@ abstract class Model
      * @param string $action are SQL options
      * @return array
      */
-    public function findAll(string $action = "") : array
+    public function findAll(string $action = "") 
     {
         $sql = "SELECT * FROM $this->table $action ";
         $result = $this->pdo->query($sql);
@@ -45,7 +45,7 @@ abstract class Model
      * @param integer $itemId 
      * @return array
      */
-    public function findById(int $itemId): array
+    public function findById(int $itemId)
     {
         $tableId = $this->table . 'Id';
         $sql = "SELECT * FROM $this->table WHERE $tableId = :id";

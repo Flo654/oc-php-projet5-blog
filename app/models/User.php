@@ -24,6 +24,8 @@ class User extends Model
             return true;
         }
         return false;
+
+        //return (!$data['email'] and !$data['username']) ? true : false;
     }
 
     /**
@@ -61,7 +63,7 @@ class User extends Model
      * @param string $password
      * @return void
      */
-    public function update(int $itemId, string $password)
+    public function updatePassword(int $itemId, string $password)
     {
         $tableId = $this->table . 'Id';
         $sql = " UPDATE $this->table 
@@ -70,5 +72,17 @@ class User extends Model
         WHERE $tableId = $itemId ";
         $query = $this->pdo->prepare($sql);
         $query->execute(compact('password'));
-    }         
+    }
+    
+    public function updateIsAdmin(int $itemId, bool $isAdmin = 1)
+    {
+        $tableId = $this->table . 'Id';
+        $sql = " UPDATE $this->table 
+        SET isAdmin = :isAdmin, 
+        updatedAt = NOW()
+        WHERE $tableId = $itemId ";
+        $query = $this->pdo->prepare($sql);
+        $query->execute(compact('isAdmin'));
+    }
+    
 }
