@@ -6,7 +6,7 @@ use Exception;
 
 class User {
 
-    private $userModel = new ModelsUser();
+    //private $userModel = new ModelsUser();
     
     ////////////////////////////////////////
     //////////// FRONT /////////////////////
@@ -15,31 +15,25 @@ class User {
     // creer un utilisateur
     public function createUser()
     {
-        
-        try {
-            //recuperer les données du formulaire en POST        
-            $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
-            $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-            $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
-
-            //verifier les données du formulaire
-            if ( !$password || !$email || $username) {
                
-                throw new Exception( "Veuillez remplir tous les champs ");
-            }
-            
-            //hacher le mot de passe
-            $hachPassword = password_hash($password, PASSWORD_DEFAULT);
-
-            //creer l'utilisateur
-            $userModel = new ModelsUser();
-            $userModel->create($username,$email,$hachPassword);
-            // afficher le message de reussite
-            // diriger vers la page de connection
-        } catch ( Exception $e) {
-
-            return $e->getMessage();
-        }
+        //recuperer les données du formulaire en POST        
+        $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+        $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+        $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+        
+        //verifier les données du formulaire
+        if ( !$password || !$email || !$username)
+        {               
+            throw new Exception( "Veuillez remplir tous les champs ");
+        }        
+        //hacher le mot de passe
+        $hachPassword = password_hash($password, PASSWORD_DEFAULT);       
+        //creer l'utilisateur
+        $userModel = new ModelsUser();
+        $userModel->create($username,$email,$hachPassword);
+        // afficher le message de reussite
+        // diriger vers la page de connection
+        
         
 
     }

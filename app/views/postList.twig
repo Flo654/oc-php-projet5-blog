@@ -1,0 +1,107 @@
+{% include "header.twig" %}
+{% block navbar %}
+    {% include "navbarBlog.twig" %}
+{% endblock %}
+
+    
+
+
+
+
+
+    <style>
+    .card-body{
+        padding: 0rem;
+    }
+    .card-title{
+        margin-bottom : 0rem
+    }
+    
+    .lineHeight{
+        line-height: normal;
+    }
+    
+    .shadow{
+        box-shadow: 0px 0px 10px rgb(0 0 0 / 20%)
+    }
+    
+    </style>
+
+    <!-- Page Content -->
+    <div
+        class="container-fluid no-left-padding no-right-padding page-content ">        
+        <div class="container top"> 
+                 
+            <div class="row mx-auto"> 
+                           
+                <div class="col-sm-8 col-12  top">
+
+                    <div class="row ">
+                    
+                        {% for article in articles %}                       
+                        
+                            <div class="col-md-4 mb-5">
+                                <img src="{{article.imgUrl}}" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title text-uppercase">{{article.title}}</h5>
+                                    <p class="card-text badge badge-pill badge-warning">{{article.name}}</p><span><small class="text-muted ml-2">last updated: {{article.updatedAt}}</small></span>
+                                    <p class="card-text">By {{article.author}}</p>
+                                    <p class="card-text font-weight-bold mt-3 lineHeight">{{article.chapo}} Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corru</p>
+                                    <a href="/article-{{article.articleId}}" class="card-text badge badge-pill badge-info">Read more...</a>
+                                    <hr>
+                                    
+                                </div>
+                            </div>
+                            
+                        {% endfor %}
+                        
+                        
+                        
+                    </div>
+                    <!-- Pagination- -->
+                    
+                </div>
+                <!-- Content Area -->
+                <!-- Widget Area -->
+                <div class="col-lg-4 col-md-6 widget-area top">
+                    
+                    <!-- Widget : Categories -->
+                    <aside class="widget widget_categories text-center">
+                        <h3 class="widget-title">Categories</h3>
+                        <ul>
+                            {% for category in categories %}
+                                <li><a href="#" title="{{category.name}}">{{category.name}}</a></li>
+                            {% endfor %}
+                            
+                        </ul>
+                    </aside>
+                    <!-- Widget : Categories /- -->
+                    
+                    
+                    <!-- Widget : Newsletter -->
+                    <aside class="widget widget_newsletter">
+                        <h3 class="widget-title">Newsletter</h3>
+                        <div class="newsletter-box">
+                            <i class="ion-ios-email-outline"></i>
+                            <h4>Sign Up for Newsletter</h4>
+                            <p>Sign up to receive latest posts and news
+                            </p>
+                            <form>
+                                <input type="text" class="form-control" placeholder="Your email address"/>
+                                <input type="submit" value="Subscribe Now"/>
+                            </form>
+                        </div>
+                    </aside>
+                    <!-- Widget : Newsletter /- -->
+                </div>
+                <!-- Widget Area /- -->
+            </div>
+            <!-- Row /- -->
+        </div>
+        <!-- Container /- -->
+    </div>
+    <!-- Page Content /- -->
+
+{% include "footer.twig" %}

@@ -1,0 +1,43 @@
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light fixed-top bg-white">
+  <a href="/home" class="navbar-brand"><img src="assets/img/LGO.jpg" alt=""></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+    <div class=" justify-content-end collapse navbar-collapse" id="navbarNav">
+        <div>
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/blog">My blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">contact</a>
+                </li>        
+            </ul>
+        </div>
+        <div class="ml-3 mt-3 mt-sm-0">
+
+        {% if isConnected %}
+        <a href="#logoutModal"><button class="btn-common text-white text-uppercase rounded border-0" data-toggle="modal" data-target="#logoutModal">logout</button></a>
+        {% else %}
+            <button class=" btn-common text-white text-uppercase rounded border-0" data-toggle="modal" data-target="#exampleModal" >login</button>   
+            
+        {% endif %}         
+            
+        </div>
+        
+        
+    </div>
+    
+</nav >
+{% include "login.twig" %}   
+
+{% include "logout.twig" %}

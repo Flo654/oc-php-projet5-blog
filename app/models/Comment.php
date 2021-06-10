@@ -5,6 +5,15 @@ class Comment extends Model
 {
     protected $table = 'comment';
     
+
+
+    public function findAll(string $action = "")
+    {
+        $sql = "SELECT comment.commentId, comment.userId, comment.articleId, comment.content, comment.isValid, comment.updatedAt,comment.createdAt, user.username FROM comment INNER JOIN user ON comment.userId = user.userId $action ";
+        $result = $this->pdo->query($sql);
+        return  $result->fetchAll();
+    }
+
     /**
      * function that create a comment in article
      *

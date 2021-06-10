@@ -13,27 +13,26 @@ class Comment {
      */
     public function insertComment()
     {       
-        //on verifie que le user est connecté
-        //on recupere le userId dans $_SESSION
-        
-        $articleId = (int)filter_input(INPUT_POST, 'articleId', FILTER_SANITIZE_SPECIAL_CHARS);
-        $content = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_SPECIAL_CHARS);
-        
-        try {
-            //on verifie que tous les champs sont bien remplis
-            if ( !$content || !$articleId) {
-               
-                throw new Exception( "Veuillez remplir tous les champs ");
-            }
-            $commentModel = new ModelsComment();           
-            $commentModel->create($userId, $articleId, $content);
-            
-            header('Location: article.php?id=' . $articleId);
-            
-        } 
-        catch (Exception $e) {
-            echo $e->getMessage();
+        //on verifie que le user est connect
+        if (! $_SESSION['isConnected']){
+            throw new Exception("user not connected");            
         }
+        //on recupere le userId dans $_SESSION
+        $userId = (int) $_SESSION['user']->userId;
+        $articleId = (int)filter_input(INPUT_POST, 'articleId', FILTER_SANITIZE_NUMBER_INT);
+        $content = filter_input(INPUT_POST, 'comment');
+               
+        //on verifie que tous les champs sont bien remplis
+        if ( !$content || !$articleId) {
+            
+            throw new Exception( "Veuillez remplir tous les champs ");
+        }
+        $commentModel = new ModelsComment();           
+        $commentModel->create( $userId, $articleId, $content);
+        
+            
+     
+        
     } 
 
     // backend    

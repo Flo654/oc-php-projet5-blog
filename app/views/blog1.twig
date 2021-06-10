@@ -1,0 +1,234 @@
+{% include "header.twig" %}
+{% block navbar %}
+	{% include "navbarBlog.twig" %}
+{% endblock %}
+
+
+<!-- Slider Section -->
+<div
+	class="container-fluid no-left-padding no-right-padding  slider-section2 topp">
+	<!-- Container -->
+	<div class="container">
+		<div id="slider-carousel-2" class="carousel slide" data-ride="carousel">
+			<div class="carousel-inner" role="listbox">
+				<div class="carousel-item active">
+					<div class="row">
+						<div class="col-lg-5 col-sm-12 post-block post-big">
+							<div class="post-box">
+								<img src="assets/img/gallery/img-1.jpg" alt="Slide"/>
+								<div class="entry-content">
+									<span class="post-category">
+										<a href="#" title="Travel">Travel</a>
+									</span>
+									<h3>
+										<a href="#" title="Best Surfing Spots for Beginners and Advanced">Best Surfing Spots for Beginners and Advanced</a>
+									</h3>
+									<a href="#" title="Read More">Read More</a>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 col-sm-12 post-block post-thumb">
+							<div class="post-box">
+								<img src="assets/img/gallery/img-2.jpg" alt="Slide"/>
+								<div class="entry-content  ">
+									<span class="post-category">
+										<a href="#" title="Sport">Sport</a>
+									</span>
+									<h3>
+										<a href="#" title="High-Tech Prototype Bike Announced">High-Tech Prototype Bike Announced</a>
+									</h3>
+									<a href="#" title="Read More">Read More</a>
+								</div>
+							</div>
+							<div class="post-box">
+								<img src="assets/img/gallery/img-3.jpg" alt="Slide"/>
+								<div class="entry-content">
+									<span class="post-category">
+										<a href="#" title="Nature">Nature</a>
+									</span>
+									<h3>
+										<a href="#" title="White Sand of The Desert Discovery">White Sand of The Desert Discovery</a>
+									</h3>
+									<a href="#" title="Read More">Read More</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- Container /- -->
+</div>
+<!-- Slider Section /- -->
+
+
+<!-- Page Content -->
+<div
+	class="container-fluid no-left-padding no-right-padding page-content ">
+	<!-- Container -->
+	<div
+		class="container">
+		<!-- Row -->
+		<div
+			class="row">
+			<!-- Content Area -->
+			<div
+				class="col-lg-8 col-md-6 content-area">
+				<!-- Row -->
+				<div class="row">
+                    {% for article in articles %}                       
+                    
+					<div class="col-12 col-md-12 col-sm-6 blog-paralle">
+						<div class="type-post">
+							<div class="entry-cover">
+								<div class="post-meta">
+									<span class="byline">by
+										<a href="#" title="Indesign">inDesign</a>
+									</span>
+									<span class="post-date">
+										<a href="#">{{article.createdAt}}</a>
+									</span>
+								</div>
+								<img  src="assets/img/gallery/img-{{article.articleId}}.jpg" alt="Post"/>
+							</div>
+							<div class="entry-content">
+								<div class="entry-header">
+									<span class="post-category">
+										Technology
+									</span>
+									<h3 class="entry-title">
+										{{article.title}}
+									</h3>
+								</div>
+								<p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings his mistaken...</p>
+								<a href="index.php?articleId={{article.articleId}}" title="Read More">Read More</a>
+							</div>
+						</div>
+					</div>
+                    {% endfor %}
+                    
+                    
+					
+				</div>
+				<!-- Row /- -->
+				{# <!-- Pagination -->
+				<nav class="navigation pagination">
+					<h2 class="screen-reader-text">Posts navigation</h2>
+					<div class="nav-links">
+						<a class="prev page-numbers" href="#">Previous</a>
+						<span class="page-numbers current">
+							<span class="meta-nav screen-reader-text">Page
+							</span>1
+						</span>
+						<a class="page-numbers" href="#">
+							<span class="meta-nav screen-reader-text">Page
+							</span>2</a>
+						<a class="page-numbers" href="#">
+							<span class="meta-nav screen-reader-text">Page
+							</span>3</a>
+						<a class="page-numbers" href="#">
+							<span class="meta-nav screen-reader-text">Page
+							</span>...</a>
+						<a class="page-numbers" href="#">
+							<span class="meta-nav screen-reader-text">Page
+							</span>6</a>
+						<a class="next page-numbers" href="#">Next</a>
+					</div>
+				</nav>
+				<!-- Pagination /- --> #}
+			</div>
+			<!-- Content Area -->
+			<!-- Widget Area -->
+			<div
+				class="col-lg-4 col-md-6 widget-area">
+				<!-- Widget : Latest Post -->
+				<aside class="widget widget_latestposts">
+					<h3 class="widget-title">Popular Posts</h3>
+					<div class="latest-content">
+						<a href="#" title="Recent Posts">
+							<i><img src="assets/img/gallery/img-1.jpg" class="wp-post-image" alt="blog-1"/></i>
+						</a>
+						<h5>
+							<a title="Beautiful Landscape View of Rio de Janeiro" href="#">Beautiful Landscape View of Rio de Janeiro</a>
+						</h5>
+						<span>
+							<a href="#">march 14, 2017</a>
+						</span>
+					</div>
+					<div class="latest-content">
+						<a href="#" title="Recent Posts">
+							<i><img src="assets/img/gallery/img-1.jpg" class="wp-post-image" alt="blog-1"/></i>
+						</a>
+						<h5>
+							<a title="Beautiful Landscape View of Rio de Janeiro" href="#">Beautiful Landscape View of Rio de Janeiro</a>
+						</h5>
+						<span>
+							<a href="#">march 14, 2017</a>
+						</span>
+					</div>
+                    <div class="latest-content">
+						<a href="#" title="Recent Posts">
+							<i><img src="assets/img/gallery/img-1.jpg" class="wp-post-image" alt="blog-1"/></i>
+						</a>
+						<h5>
+							<a title="Beautiful Landscape View of Rio de Janeiro" href="#">Beautiful Landscape View of Rio de Janeiro</a>
+						</h5>
+						<span>
+							<a href="#">march 14, 2017</a>
+						</span>
+					</div>
+                    <div class="latest-content">
+						<a href="#" title="Recent Posts">
+							<i><img src="assets/img/gallery/img-1.jpg" class="wp-post-image" alt="blog-1"/></i>
+						</a>
+						<h5>
+							<a title="Beautiful Landscape View of Rio de Janeiro" href="#">Beautiful Landscape View of Rio de Janeiro</a>
+						</h5>
+						<span>
+							<a href="#">march 14, 2017</a>
+						</span>
+					</div>
+                    
+				</aside>
+				<!-- Widget : Latest Post /- -->
+				<!-- Widget : Categories -->
+				<aside class="widget widget_categories text-center">
+					<h3 class="widget-title">Categories</h3>
+					<ul>
+						<li><a href="#" title="Nature">Nature</a></li>
+						<li><a href="#" title="Technology">Technology</a></li>
+						<li><a href="#" title="Travel">Travel</a></li>
+						<li><a href="#" title="Sport">Sport</a></li>
+						<li><a href="#" title="Lifestyle">Lifestyle</a></li>
+					</ul>
+				</aside>
+				<!-- Widget : Categories /- -->
+				
+				
+				<!-- Widget : Newsletter -->
+				<aside class="widget widget_newsletter">
+					<h3 class="widget-title">Newsletter</h3>
+					<div class="newsletter-box">
+						<i class="ion-ios-email-outline"></i>
+						<h4>Sign Up for Newsletter</h4>
+						<p>Sign up to receive latest posts and news
+						</p>
+						<form>
+							<input type="text" class="form-control" placeholder="Your email address"/>
+							<input type="submit" value="Subscribe Now"/>
+						</form>
+					</div>
+				</aside>
+				<!-- Widget : Newsletter /- -->
+			</div>
+			<!-- Widget Area /- -->
+		</div>
+		<!-- Row /- -->
+	</div>
+	<!-- Container /- -->
+</div>
+<!-- Page Content /- --></main></div>
+
+{% include "footer.twig" %}

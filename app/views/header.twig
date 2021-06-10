@@ -1,0 +1,43 @@
+{% block header %}
+    <!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Blog Florent Ascensio</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <!-- Fonts -->
+    
+    <script src="https://kit.fontawesome.com/45e38e596f.js" crossorigin="anonymous"></script>
+    <!-- Icon -->
+    <link rel="stylesheet" type="text/css" href="assets/fonts/simple-line-icons.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Main Style -->
+    
+    <link rel="stylesheet" type="text/css" href="../assets/css/main.css">
+    
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+
+    <!-- Responsive Style -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/responsive.css">
+
+  </head>
+  <body>
+
+    <!-- Header Area wrapper Starts -->
+    <header id="header-wrap">
+    
+      {% block navbar %}{% endblock %}
+
+      <!-- Hero Area Start -->
+      {% block hero %}{% endblock %}
+      <!-- Hero Area End -->
+
+    </header>
+    <!-- Header Area wrapper End -->
+{% endblock %}

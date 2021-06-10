@@ -1,5 +1,6 @@
 <?php
 namespace App\models;
+use Exception;
 
 class User extends Model
 {
@@ -19,13 +20,7 @@ class User extends Model
         $result = $this->pdo->prepare($sql);
         $result->execute(['username'=> $username, 'email'=> $email]);
         $data = $result->fetch();
-        
-        if (!$data['email'] and !$data['username']) {
-            return true;
-        }
-        return false;
-
-        //return (!$data['email'] and !$data['username']) ? true : false;
+        return (!$data['email'] and !$data['username']) ? true : false;
     }
 
     /**
@@ -40,11 +35,9 @@ class User extends Model
     {
         //we verify if username and email are already in database
         $result = $this->isDatasAlreadyInDb($username, $email);
-        if(!$result){
-            echo "username or email already existing !!";
-            return;
+        if (!$result) {
+            throw new Exception("username or email already existing !!");
         }
-
         $sql = " INSERT INTO $this->table
         SET username = :username, 
             email = :email, 
@@ -74,7 +67,7 @@ class User extends Model
         $query->execute(compact('password'));
     }
     
-    public function updateIsAdmin(int $itemId, bool $isAdmin = 1)
+    /* public function updateIsAdmin(int $itemId, bool $isAdmin = 1)
     {
         $tableId = $this->table . 'Id';
         $sql = " UPDATE $this->table 
@@ -83,6 +76,31 @@ class User extends Model
         WHERE $tableId = $itemId ";
         $query = $this->pdo->prepare($sql);
         $query->execute(compact('isAdmin'));
-    }
+    } */
     
+    public  function login(string $email, string $password) 
+    {
+          
+        $sql = "SELECT * FROM user WHERE email = :email";
+        $result = $this->pdo->prepare($sql);
+        $result->execute(['email'=> $email]);
+        $user = $result->fetch();
+        // on verifie si le mail existe dans la base
+        if(!$user)
+        {
+            throw new Exception("email inconnue", 401);
+            return;                
+        }
+        //on verifie si le mot de passe est correct
+        if (!password_verify($password, $user->password)) 
+        {
+            throw new Exception ("Mot de passe incorrect");
+            return;
+        }           
+        return  $user;      
+    }
+
+    public function signUp (){
+
+    }
 }

@@ -1,0 +1,65 @@
+{% include "header.twig" %}
+<style>
+
+    .stylo{
+        color: #00b4d9;
+
+    }
+    .trash{
+    color: #dc3545;
+    }
+
+    .card{
+    box-shadow: 0px 0px 10px rgb(0 0 0 / 20%)
+    }
+
+    .card-title{
+        margin-block-start: 0em;
+        margin-block-end: 0em;
+    }
+
+
+</style>
+    
+ {% block navbar %} 
+    {% include "navbar.twig" %} 
+{% endblock %}                     
+
+<div class="container topp">
+    <div class="row mb-4">
+        {% for article in articles %}       
+        <div class="col-md-12 mx-auto mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bold text-uppercase">{{article.title}}</h5>
+                    <p class="card-text">{{article.chapo}}</p>
+                    <small class="text-muted font-italic">crée le {{article.updatedAt}} </small>
+                    
+                    <div class="d-flex justify-content-end">
+                        <a href="/backArticle-{{article.articleId}}"><i class="stylo fas fa-pen mr-3"></i></a>
+                        <a href="/deleteArticle-{{article.articleId}}"><i class="trash fas fa-trash"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>        
+        {% endfor %}  
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        
+                   
+
+
+{% include "footer.twig" %}
