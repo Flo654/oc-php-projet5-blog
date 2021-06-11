@@ -94,7 +94,7 @@ class User {
             if(!$user){
                 throw new Exception("le User avec cet id n'existe pas'");
             } */
-            $user = $this->checkingData($userId);
+            //$user = $this->checkingData($userId);
             // require la vue pour afficher le user
 
         } catch (Exception $e) {

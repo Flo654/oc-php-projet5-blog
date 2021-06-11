@@ -8,14 +8,14 @@ use App\controllers\Render;
 class Router
 {   
     
-    public function get($path, $viewName, $isConnected)
+    public function get($path, $viewName)
     {
         $uri = filter_input(INPUT_SERVER,"REQUEST_URI") ?? '/home';
 
-        if($path == '/article-:id' ){
-            $regexUri = preg_match('%(/article-)([0-9]+)%', $uri, $matches);
+        if($path == '/blog/article-:id' ){
+            $regexUri = preg_match('%(/blog/article-)([0-9]+)%', $uri, $matches);
             if ($regexUri){$matchUri = $matches;}      
-            $regexPath = preg_match('%(/article-)(\:id)%', $path, $matches);       
+            $regexPath = preg_match('%(/blog/article-)(\:id)%', $path, $matches);       
             if ($regexPath){$matchPath = $matches;}        
             if ($regexUri && $regexPath){
                 if($matchUri[1] == $matchPath[1]){
@@ -60,19 +60,19 @@ class Router
                 ///////////////////////////////////////////
                 
                 case 'homeController':                                        
-                    $render->home($isConnected);                    
+                    $render->home();                    
                     break;
 
                 case 'postListController':
-                    $render->postList($isConnected);                    
+                    $render->postList();                    
                     break;                    
 
                 case 'singlePostController':
-                    $render->singlePost($isConnected, $articleId);
+                    $render->singlePost($articleId);
                     break;
                 
                 case 'contactController':
-                    $render->contact($isConnected);
+                    $render->contact();
                     break;
 
 
@@ -81,25 +81,26 @@ class Router
                 ///////////////////////////////////////////
 
                 case 'adminController':
-                    $render->admin($isConnected);
+                    $render->admin();
                     break;
 
                 case 'articleController':
-                    $render->article($isConnected);
+                    $render->article();
                     break;
                 
                 case 'adminPostList':
-                    $render->adminPostList($isConnected);
+                    $render->adminPostList();
                     break;
 
                 case 'modifyController':
-                    $render->modifyController($isConnected,$articleId);
+                    
+                    $render->modifyController($articleId);
                     break;
 
                 case 'deleteController':
                     $model = new Article();
                     $model->deleteArticle($articleId);
-                    header("Location: /home");   
+                    header("Location: /postList");   
                 default:
                 
                     break;
@@ -108,23 +109,21 @@ class Router
         }
     }
 
-    public function post($path, $viewName)
+    public function post($path, $viewName=null)
     {
 
         $submit = filter_input(INPUT_POST,('submit'));
-        $path;
-        
         if (!$submit){return;}
         if ($submit === $path){
 
             switch ($submit) {
                 case 'signIn':
-                    $auth = Auth::auth(); 
+                    Auth::auth(); 
                     header("Refresh: 0");                
                     break;
                      
                 case 'logout':
-                    $auth = Auth::logout(); 
+                    Auth::logout(); 
                     header("Refresh: 0");                
                     break;
     

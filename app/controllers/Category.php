@@ -12,7 +12,7 @@ class Category
     $model = new ModelsCategory();
     $categories = $model->findAll();
     if(!$categories){
-        throw new Exception("impossible de charger les données");
+        throw new Exception("impossible to load data !!");
     }    
     return $categories;
    }
@@ -22,7 +22,7 @@ class Category
     $model = new ModelsCategory();
     $categories = $model->getCategoryById($articleId);
     if(!$categories){
-        throw new Exception("impossible de charger les données");
+        throw new Exception("impossible to load data !!");
     }    
     return $categories;
    }

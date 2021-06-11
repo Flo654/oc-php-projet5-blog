@@ -1,5 +1,7 @@
 <?php
 namespace App\models;
+use Exception;
+
 
 class Comment extends Model
 {
@@ -11,6 +13,9 @@ class Comment extends Model
     {
         $sql = "SELECT comment.commentId, comment.userId, comment.articleId, comment.content, comment.isValid, comment.updatedAt,comment.createdAt, user.username FROM comment INNER JOIN user ON comment.userId = user.userId $action ";
         $result = $this->pdo->query($sql);
+        if (!$result) {
+            throw new Exception("impossible to do the request !!");            
+        }
         return  $result->fetchAll();
     }
 
@@ -34,7 +39,10 @@ class Comment extends Model
             createdAt = NOW(),
             updatedAt = NOW()";
         $query = $this->pdo->prepare($sql);
-        $query->execute(compact('userId','articleId','content'));
+        $result = $query->execute(compact('userId','articleId','content'));
+        if (!$result) {
+            throw new Exception("impossible to do the request !!");            
+        }
     }
 
     /**
@@ -52,7 +60,10 @@ class Comment extends Model
             updatedAt = NOW()
         WHERE $tableId = comment:commentId ";
         $query = $this->pdo->prepare($sql);
-        $query->execute(compact('commentId'));
+        $result = $query->execute(compact('commentId'));
+        if (!$result) {
+            throw new Exception("impossible to do the request !!");            
+        }
     }
     
     /* public function getCommentsbyArticleId(int $articleId, string $options=null)

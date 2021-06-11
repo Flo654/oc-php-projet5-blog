@@ -9,44 +9,48 @@ class  Render
 {   
 
     private $twig ;
+    private $isAdmin;
     
     public function __construct()
     {
         $this->twig = new Environment (new FilesystemLoader('../app/views'));
+        $this->isAdmin = Auth::checkIfIsAdmin();
     }
    
     ////////////////////////////////////////////////////////
     ////////////////FRONT OFFICE ROUTE//////////////////////
     ////////////////////////////////////////////////////////
 
-    public  function home($isConnected){        
-        print_r( $this->twig->render('home.twig', ['isConnected'=> $isConnected]));
+    public  function home()
+    {        
+       print_r( $this->twig->render('home.twig', ['isConnected'=> $this->isAdmin['isConnected'], 'username' => $this->isAdmin['username'], 'isAdmin' => $this->isAdmin['isAdmin']]));
         return;
     }
 
-    public function postList($isConnected){
+    public function postList()
+    {
         
         $model = new Article();
         $model2 = new Category();
         $articles = $model->showArticles();
         $categories = $model2->showCategory(); 
-        print_r($this->twig->render('postList.twig', ['articles' => $articles,'categories' => $categories, 'isConnected'=> $isConnected]));
+        print_r($this->twig->render('postList.twig', ['articles' => $articles,'categories' => $categories, 'isConnected'=> $this->isAdmin['isConnected']]));
         return;
     }
 
-    public function singlePost($isConnected, $articleId){
-                
+    public function singlePost($articleId)
+    {                
         $model = new Article();
         $model2 = new Category();        
         $article = $model->showOneArticle($articleId);
         $categories = $model2->showCategoryById($articleId);
-        print_r($this->twig->render('singlePost.twig', ['article' => $article['article'],'comments' => $article['comments'], 'category' => $categories, 'isConnected'=> $isConnected]));
+        print_r($this->twig->render('singlePost.twig', ['article' => $article['article'],'comments' => $article['comments'], 'category' => $categories, 'isConnected'=> $this->isAdmin['isConnected']]));
         return;
     }
 
-    public function contact($isConnected){
-        
-        print_r($this->twig->render('contact.twig', ['isConnected' => $isConnected]));
+    public function contact()
+    {
+        print_r($this->twig->render('contact.twig', ['isConnected'=> $this->isAdmin['isConnected']]));
         return;
     }
 
@@ -55,37 +59,35 @@ class  Render
     ////////////////////////////////////////////////////////
 
 
-    public function admin($isConnected){
-        
-        $isAdmin = Auth::checkIfIsAdmin();
-        (!$isAdmin) ? print_r($this->twig->render('404.twig', ['isConnected' => $isConnected ])) : print_r($this->twig->render('backlayout.twig', ['isConnected' => $isConnected , 'username' => $isAdmin['username'], 'isAdmin' => $isAdmin['isAdmin']]));
+    public function admin()
+    {                
+        (!$this->isAdmin) ? print_r($this->twig->render('404.twig', ['isConnected'=> $this->isAdmin['isConnected'] ])) : print_r($this->twig->render('backlayout.twig', ['isConnected'=> $this->isAdmin['isConnected'] , 'username' => $this->isAdmin['username'], 'isAdmin' => $this->isAdmin['isAdmin']]));
          return; 
     }
 
-    public function article($isConnected){
+    public function article()
+    {
         $model2 = new Category(); 
         $categories = $model2->showCategory();
-        $isAdmin = Auth::checkIfIsAdmin();
-        (!$isAdmin) ? print_r($this->twig->render('404.twig', ['isConnected' => $isConnected ])) : print_r($this->twig->render('createMessage.twig', ['categories' => $categories, 'isConnected' => $isConnected,'username' => $isAdmin['username'], 'isAdmin' => $isAdmin['isAdmin']]));
+        (!$this->isAdmin) ? print_r($this->twig->render('404.twig', ['isConnected'=> $this->isAdmin['isConnected'] ])) : print_r($this->twig->render('createMessage.twig', ['categories' => $categories, 'isConnected'=> $this->isAdmin['isConnected'],'username' => $this->isAdmin['username'], 'isAdmin' => $this->isAdmin['isAdmin']]));
         return;
     }
 
-    public function adminPostList($isConnected){
+    public function adminPostList()
+    {
         $model = new Article();
         $articles = $model->showArticles();
-        $isAdmin = Auth::checkIfIsAdmin();
-        (!$isAdmin) ? print_r($this->twig->render('404.twig', ['isConnected' => $isConnected ])) : print_r($this->twig->render('adminPostList.twig', ['articles' => $articles, 'isConnected'=> $isConnected, 'username' => $isAdmin['username']]));
+        (!$this->isAdmin) ? print_r($this->twig->render('404.twig', ['isConnected'=> $this->isAdmin['isConnected']])) : print_r($this->twig->render('adminPostList.twig', ['articles' => $articles, 'isConnected'=> $this->isAdmin['isConnected'], 'username' => $this->isAdmin['username']]));
         return;
     }
 
-    public function modifyController($isConnected, $articleId)
+    public function modifyController($articleId)
     {
         $model = new Article();
         $model2 = new Category();        
         $article = $model->showOneArticle($articleId);
         $categories = $model2->showCategory();
-        $isAdmin = Auth::checkIfIsAdmin();
-        (!$isAdmin) ? print_r($this->twig->render('404.twig', ['isConnected' => $isConnected ])) : print_r($this->twig->render('modifyPost.twig', ['article' => $article['article'],'categories' => $categories, 'isConnected'=> $isConnected, 'username' => $isAdmin['username'], 'isAdmin' => $isAdmin['isAdmin']]));
+        (!$this->isAdmin) ? print_r($this->twig->render('404.twig', ['isConnected'=> $this->isAdmin['isConnected']])) : print_r($this->twig->render('modifyPost.twig', ['article' => $article['article'],'categories' => $categories, 'isConnected'=> $this->isAdmin['isConnected'], 'username' => $this->isAdmin['username'], 'isAdmin' => $this->isAdmin['isAdmin']]));
         return;
     }
     

@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Shadows+Into+Light|Source+Sans+Pro:400,700");
 
 html {
-	overflow-x: hidden;
+  overflow-x: hidden;
 }
 
 body {
@@ -64,8 +64,7 @@ p {
 }
 
 .bottom {
-	margin-bottom: 12rem;
-	;
+	margin-bottom: 12rem;	
 }
 
 .jumbotron {
@@ -132,7 +131,7 @@ ol li {
 }
 
 .section-title-header p {
-	text: center;
+	text-align: center;
 	font-weight: 400;
 	line-height: 26px;
 	padding-bottom: 36px;
@@ -595,7 +594,6 @@ a.back-to-top:focus {
 	outline: none;
 }
 
-.navbar {}
 
 .navbar li.active a.nav-link {
 	color: #00b4d9;
@@ -656,7 +654,7 @@ a.back-to-top:focus {
 	color: #333;
 	border-bottom: 1px solid #f1f1f1;
 	text-decoration: none;
-	display: inline-block;
+	display: block;
 	float: left;
 	clear: both;
 	position: relative;
@@ -710,7 +708,6 @@ a.back-to-top:focus {
 	}
 }
 
-.navbar-toggler {}
 
 .mobile-menu {
 	display: none;
@@ -835,7 +832,7 @@ a.back-to-top:focus {
 /* ==========================================================================
   Portfolio Section
    ========================================================================== */
-#portfolios {}
+
 
 #portfolios .mix {
 	padding: 10px;
@@ -1617,7 +1614,7 @@ span {
 	animation: loading 2s 1s infinite;
 }
 
-@keyframes "loading" {
+@keyframes loading {
 	from {
 		left: 0;
 	}
@@ -1637,7 +1634,7 @@ span {
 	}
 }
 
-@-webkit-keyframes "loading" {
+@-webkit-keyframes loading {
 	from {
 		left: 0;
 	}
@@ -1647,7 +1644,7 @@ span {
 	}
 }
 
-@-ms-keyframes "loading" {
+@-ms-keyframes loading {
 	from {
 		left: 0;
 	}
@@ -1657,7 +1654,7 @@ span {
 	}
 }
 
-@-o-keyframes "loading" {
+@-o-keyframes loading {
 	from {
 		left: 0;
 	}
@@ -1862,7 +1859,7 @@ span {
 	position: absolute;
 	min-width: 120px;
 	max-width: 120px;
-	visibility: hidden\0/;
+	visibility: hidden\0;
 	transition: all 0.17s ease-in-out;
 	-moz-transition: all 0.17s ease-in-out;
 	-webkit-transition: all 0.17s ease-in-out;
@@ -4380,7 +4377,7 @@ article[class*="type-"] .entry-content .entry-footer .social>li>a:hover {
 	margin-top: 10px;
 	outline: none;
 	padding: 10px 40px;
-	display: inline-block;
+	display: block;
 	text-transform: uppercase;
 	-webkit-transition: all 1s ease 0s;
 	-moz-transition: all 1s ease 0s;
@@ -6847,7 +6844,7 @@ article[class*="type-"] .entry-content .entry-footer .social>li>a:hover {
 		padding: 0;
 		min-width: 218px;
 		max-width: 218px;
-		visibility: hidden\0/;
+		visibility: hidden\0;
 		transition: all 0.17s ease-in-out;
 		-moz-transition: all 0.17s ease-in-out;
 		-webkit-transition: all 0.17s ease-in-out;
@@ -7163,10 +7160,7 @@ article[class*="type-"] .entry-content .entry-footer .social>li>a:hover {
 
 	.ownavigation .navbar-nav li .dropdown-menu>li>a {
 		color: #232323;
-		padding-left: 0;
-		padding-right: 0;
-		padding-top: 6px;
-		padding-bottom: 6px;
+		padding: 6px, 0px, 6px, 0px;
 		-webkit-transition: all 1s ease 0s;
 		-moz-transition: all 1s ease 0s;
 		-o-transition: all 1s ease 0s;
@@ -7198,4 +7192,7 @@ article[class*="type-"] .entry-content .entry-footer .social>li>a:hover {
 	.ownavigation .navbar-toggler {
 		margin: 20px 0;
 	}
+}
+.form-group {
+    margin-bottom: 0rem;
 }

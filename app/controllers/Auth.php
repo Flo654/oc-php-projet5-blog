@@ -13,15 +13,15 @@ class Auth
         $email = filter_input(INPUT_POST,"email");
         $userModel = new User();
         $user = $userModel->login($email, $password);
-
-        if(session_status() === PHP_SESSION_NONE)
-        {
-            session_start();
+        if(!$user){
+            throw new Exception("impossible to load data !!");
         }
-                
+
+        if(session_status() === PHP_SESSION_NONE){
+            session_start();
+        }                
         $_SESSION['user']= $user;
         $_SESSION['isConnected'] = true;       
-        
     }
 
     public static function logout()
@@ -42,7 +42,8 @@ class Auth
         }
         $username = $_SESSION['user']->username;
         $isAdmin =  $_SESSION['user']->isAdmin;
-        return (!$isAdmin) ?  false : ['username' => $username, 'isAdmin' => $isAdmin];
+        $isConnected = $_SESSION['isConnected'] = true; 
+        return (!$isAdmin) ?  false : ['username' => $username, 'isAdmin' => $isAdmin, 'isConnected' => $isConnected];
     }
 
 }

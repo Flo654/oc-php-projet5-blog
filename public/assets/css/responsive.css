@@ -1,4 +1,4 @@
-/* only small desktops */
+
 @media (min-width: 992px) and (max-width: 1199px) {
   #hero-area .contents .head-title {
     font-size: 40px;
@@ -11,7 +11,7 @@
   }
 }
 
-/* tablets */
+
 @media (max-width: 991px) {
   .section-title {
     font-size: 30px;
@@ -25,7 +25,7 @@
   }
 }
 
-/* only small tablets */
+
 @media (min-width: 768px) and (max-width: 991px) {
   .section-title {
     font-size: 26px;
@@ -41,8 +41,8 @@
     font-size: 14px;
   }
 }
+ 
 
-/* mobile or only mobile */
 @media (max-width: 767px) {
   .section-title {
     font-size: 22px;
@@ -85,3 +85,4 @@
     font-size: 1.5rem;
   }
 }
+ 

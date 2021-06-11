@@ -29,7 +29,10 @@ class Article extends Model
             createdAt = NOW(),
             updatedAt = NOW()";
         $query = $this->pdo->prepare($sql);
-        $query->execute(compact('author', 'title', 'chapo', 'categoryId', 'content', 'readTime', 'imgUrl'));
+        $result = $query->execute(compact('author', 'title', 'chapo', 'categoryId', 'content', 'readTime', 'imgUrl'));
+        if (!$result){
+            throw new Exception("impossible to record post in Database !!" );            
+        }
         
     }
 
@@ -56,16 +59,15 @@ class Article extends Model
             readTime = :readTime,
             imgUrl = :imgUrl,
             updatedAt = NOW()
-        WHERE articleId = :articleId ";
+        WHERE $tableId = :articleId ";
         $query = $this->pdo->prepare($sql);
-        $qer = $query->execute( ['articleId' => $articleId, 'author'=> $author, 'title' => $title, 'chapo' => $chapo, 'categoryId' => $categoryId, 'content' => $content,  'readTime' => $readTime, 'imgUrl' => $imgUrl]);
-        if(!$qer){
-            throw new Exception("Error Processing Request", 1);
-            
+        $result = $query->execute( ['articleId' => $articleId, 'author'=> $author, 'title' => $title, 'chapo' => $chapo, 'categoryId' => $categoryId, 'content' => $content,  'readTime' => $readTime, 'imgUrl' => $imgUrl]);
+        if(!$result){
+            throw new Exception("Impossible to update post");            
         }
     } 
     
-   /**
+    /**
      * function that finds all items
      *
      * @param string $action are SQL options
@@ -75,17 +77,21 @@ class Article extends Model
     {
         $sql = "SELECT article.articleId, article.title, article.author, article.chapo, article.content, article.readTime, article.imgUrl, article.createdAt, article.updatedAt, category.name FROM $this->table INNER JOIN category ON article.categoryId = category.categoryId $action ";
         $result = $this->pdo->query($sql);
+        if (!$result) {
+            throw new Exception("impossible to do the request !!");            
+        }
         return  $result->fetchAll();
     }
-
     
 
     public function getUsername(int $articleId): array
     {
-
         $sql = "SELECT category.name FROM article INNER JOIN category ON category.categoryId = article.categoryId WHERE articleId = :articleId ";
         $query = $this->pdo->prepare($sql);
-        $query->execute(['articleId' => $articleId]);
+        $result = $query->execute(['articleId' => $articleId]);
+        if (!$result) {
+            throw new Exception("impossible to do the request !!");            
+        }
         return $query->fetch();
 
     }

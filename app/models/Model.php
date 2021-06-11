@@ -1,5 +1,6 @@
 <?php
 namespace App\models;
+use Exception;
 
 use App\Database;
 
@@ -36,6 +37,9 @@ abstract class Model
     {
         $sql = "SELECT * FROM $this->table $action ";
         $result = $this->pdo->query($sql);
+        if (!$result) {
+            throw new Exception("impossible to do the request !!");            
+        }
         return  $result->fetchAll();
     }
     
@@ -51,6 +55,9 @@ abstract class Model
         $sql = "SELECT * FROM $this->table WHERE $tableId = :id";
         $result = $this->pdo->prepare($sql);
         $result->execute(['id' => $itemId]);
+        if (!$result) {
+            throw new Exception("impossible to do the request !!");            
+        }
         return $result->fetch();
     }
     
@@ -66,5 +73,8 @@ abstract class Model
         $sql = "DELETE FROM $this->table WHERE $tableId = :id";
         $result = $this->pdo->prepare($sql);
         $result->execute(['id' => $itemId]);
+        if (!$result) {
+            throw new Exception("impossible to do the request !!");            
+        }
     }    
 }

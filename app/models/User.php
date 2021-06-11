@@ -35,8 +35,8 @@ class User extends Model
     {
         //we verify if username and email are already in database
         $result = $this->isDatasAlreadyInDb($username, $email);
-        if (!$result) {
-            throw new Exception("username or email already existing !!");
+        if(!$result){
+            throw new Exception("username or email already existing !!");            
         }
         $sql = " INSERT INTO $this->table
         SET username = :username, 
@@ -46,7 +46,10 @@ class User extends Model
             createdAt = NOW(),
             updatedAt = NOW()";
         $query = $this->pdo->prepare($sql);
-        $query->execute(compact('username', 'email', 'password'));
+        $result = $query->execute(compact('username', 'email', 'password'));
+        if (!$result) {
+            throw new Exception("impossible to do the request !!");            
+        }
     }
 
     /**
@@ -64,7 +67,10 @@ class User extends Model
         updatedAt = NOW()
         WHERE $tableId = $itemId ";
         $query = $this->pdo->prepare($sql);
-        $query->execute(compact('password'));
+        $result = $query->execute(compact('password'));
+        if (!$result) {
+            throw new Exception("impossible to do the request !!");            
+        }
     }
     
     /* public function updateIsAdmin(int $itemId, bool $isAdmin = 1)
@@ -88,19 +94,16 @@ class User extends Model
         // on verifie si le mail existe dans la base
         if(!$user)
         {
-            throw new Exception("email inconnue", 401);
+            throw new Exception("wrong mail", 401);
             return;                
         }
         //on verifie si le mot de passe est correct
         if (!password_verify($password, $user->password)) 
         {
-            throw new Exception ("Mot de passe incorrect");
+            throw new Exception ("incorrect password");
             return;
         }           
         return  $user;      
     }
 
-    public function signUp (){
-
-    }
 }
