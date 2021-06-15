@@ -14,37 +14,51 @@ class Comment extends Model
      * @param string $content
      * @return void
      */
-    public function create(int $articleId, string $author, string $authorEmail, string $content)
+    public function create( int $userId ,int $articleId, string $content)
     {
         
         $sql = " INSERT INTO $this->table
-        SET articleId = :articleId, 
-            author = :author,
-            authorEmail = :authorEmail,
+        SET userId = :userId,
+            articleId = :articleId, 
             content = :content,
             isValid = 0,
             createdAt = NOW(),
             updatedAt = NOW()";
         $query = $this->pdo->prepare($sql);
-        $query->execute(compact('articleId', 'author', 'authorEmail','content'));
+        $query->execute(compact('userId','articleId','content'));
     }
 
     /**
-     * function that update a comment from an article
+     * function that Valid à comment
      *
      * @param integer $commentId
      * @param string $content
      * @return void
      */
-    public function update(int $commentId,  string $content )
+    public function validComment(int $commentId)
     {
         $tableId = $this->table . 'Id';
         $sql = " UPDATE $this->table 
-        SET content = :content,
-            isValid = 0,
+        SET isValid = 1,
             updatedAt = NOW()
-        WHERE $tableId = $commentId ";
+        WHERE $tableId = comment:commentId ";
         $query = $this->pdo->prepare($sql);
-        $query->execute(compact('content'));
-    }         
+        $query->execute(compact('commentId'));
+    }
+    
+    /* public function getCommentsbyArticleId(int $articleId, string $options=null)
+    {
+        $sql = " SELECT * FROM $this->table WHERE articleId = :articleId $options"; 
+        $query = $this->pdo->prepare($sql);
+        $query->execute(['articleId' => $articleId]);
+        return $query->fetchAll();
+        
+    } */
+
+    //recuperer le nom du user (jointure)
+    public function getUsername()
+    {
+        
+    }
+
 }
