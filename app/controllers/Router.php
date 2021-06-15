@@ -11,6 +11,7 @@ class Router
     public function get($path, $viewName)
     {
         $uri = filter_input(INPUT_SERVER,"REQUEST_URI") ?? '/home';
+        
 
         if($path == '/blog/article-:id' ){
             $regexUri = preg_match('%(/blog/article-)([0-9]+)%', $uri, $matches);
@@ -51,9 +52,10 @@ class Router
             }
         }
 
-        if ($path == $uri) {
+        $render = new Render();
+        if ($path === $uri) {
            
-            $render = new Render();
+            
             switch ($viewName) {
                 ///////////////////////////////////////////
                 //////////////FRONT ROUTES/////////////////
@@ -92,8 +94,11 @@ class Router
                     $render->adminPostList();
                     break;
 
-                case 'modifyController':
-                    
+                case 'commentsController':
+                    $render->commentController();
+                    break;
+
+                case 'modifyController':                    
                     $render->modifyController($articleId);
                     break;
 
@@ -105,8 +110,13 @@ class Router
                 
                     break;
             }
+           return; 
+        } 
+        if ($path !== $uri){
+            return;
             
         }
+        
     }
 
     public function post($path, $viewName=null)
@@ -116,6 +126,7 @@ class Router
         if (!$submit){return;}
         if ($submit === $path){
 
+            
             switch ($submit) {
                 case 'signIn':
                     Auth::auth(); 
@@ -137,18 +148,25 @@ class Router
                     $model->createArticle();                    
                     break;
 
-                case 'createComment':
-                    
+                case 'createComment':                    
                     $model = new Comment();
                     $model->insertComment();                    
                     break;
 
-                case 'modifyArticle':
-                    
+                case 'modifyArticle':                    
                     $model = new Article();
                     $model->updateArticle();                   
-                    break;    
-                    
+                    break; 
+
+                case 'validateComment':                                      
+                    $model = new Comment;
+                    $model->valideComment();                                  
+                    break;
+                
+                case 'deleteComment':                                      
+                    $model = new Comment;
+                    $model->deleteComment();                                  
+                    break;
                 default:
                    
                     break;

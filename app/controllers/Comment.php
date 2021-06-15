@@ -49,7 +49,7 @@ class Comment {
     {
         
         //on recupere l'id du commentaire passé en parametre dans l'url et on verifie q'un parametre id a été renseigné
-        $commentId = (int) filter_input(INPUT_GET, 'commentId',FILTER_SANITIZE_STRING);
+        $commentId = (int) filter_input(INPUT_POST, 'commentId',FILTER_SANITIZE_STRING);
         if (!$commentId){
             throw new Exception('le parametre du commentaire n\'a pas été renseigné !!');
         }
@@ -61,19 +61,28 @@ class Comment {
             throw new Exception("il n'y a pas de commentaire qui correspond à cet Id");
         }
         //on recupere l'id de l'article avant d'effacer le commentaire
-        $articleid = $comment['articleId'];
+        //$articleid = $comment['articleId'];
         //on efface le commentaire
         $commentModel->delete($commentId);     
     }
 
     
+    public function commentsList()
+    {
+        $model = new ModelsComment;
+        $comments = $model->findCommentsToValidate();
+        return $comments;
+    }
+
+
     public function valideComment()
     {
         //on verifie que l'utilisateur est connecté
         //verifier que l'utilisateur qui efface le commentaire est admin
 
         //on recupere l'id du commentaire passé en parametre dans l'url et on verifie q'un parametre id a été renseigné
-        $commentId = (int) filter_input(INPUT_GET, 'commentId',FILTER_SANITIZE_STRING);
+        $commentId = (int) filter_input(INPUT_POST, 'commentId'); 
+        
         if (!$commentId){
             throw new Exception('le parametre du commentaire n\'a pas été renseigné !!');
         }
@@ -85,7 +94,7 @@ class Comment {
             throw new Exception("il n'y a pas de commentaire qui correspond à cet Id");
         }
         //on recupere l'id de l'article avant de valider le commentaire
-        $articleid = $comment['articleId'];
+        //$articleid = $comment['articleId'];
         //on modifie le commentaire
         $commentModel->validComment($commentId);
 

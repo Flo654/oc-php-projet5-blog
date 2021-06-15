@@ -20,7 +20,7 @@ class User extends Model
         $result = $this->pdo->prepare($sql);
         $result->execute(['username'=> $username, 'email'=> $email]);
         $data = $result->fetch();
-        return (!$data['email'] and !$data['username']) ? true : false;
+        return (!$data->email and !$data->username) ? true : false;
     }
 
     /**
@@ -36,7 +36,7 @@ class User extends Model
         //we verify if username and email are already in database
         $result = $this->isDatasAlreadyInDb($username, $email);
         if(!$result){
-            throw new Exception("username or email already existing !!");            
+            throw new Exception("username or email already existing, please change !!");            
         }
         $sql = " INSERT INTO $this->table
         SET username = :username, 
@@ -48,7 +48,7 @@ class User extends Model
         $query = $this->pdo->prepare($sql);
         $result = $query->execute(compact('username', 'email', 'password'));
         if (!$result) {
-            throw new Exception("impossible to do the request !!");            
+            throw new Exception("impossible to do this request !!");            
         }
     }
 
@@ -94,13 +94,13 @@ class User extends Model
         // on verifie si le mail existe dans la base
         if(!$user)
         {
-            throw new Exception("wrong mail", 401);
+            throw new Exception("your email is not the good one, please fill a good email",404);
             return;                
         }
         //on verifie si le mot de passe est correct
         if (!password_verify($password, $user->password)) 
         {
-            throw new Exception ("incorrect password");
+            throw new Exception ("your password is incorrect", 404);
             return;
         }           
         return  $user;      

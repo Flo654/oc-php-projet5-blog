@@ -43,7 +43,7 @@ class Auth
         $username = $_SESSION['user']->username;
         $isAdmin =  $_SESSION['user']->isAdmin;
         $isConnected = $_SESSION['isConnected'] = true; 
-        return (!$isAdmin) ?  false : ['username' => $username, 'isAdmin' => $isAdmin, 'isConnected' => $isConnected];
+        return (!$isConnected) ?  false : ['username' => $username, 'isAdmin' => $isAdmin, 'isConnected' => $isConnected];
     }
 
 }

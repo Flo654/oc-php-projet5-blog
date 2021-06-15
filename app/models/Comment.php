@@ -11,13 +11,25 @@ class Comment extends Model
 
     public function findAll(string $action = "")
     {
-        $sql = "SELECT comment.commentId, comment.userId, comment.articleId, comment.content, comment.isValid, comment.updatedAt,comment.createdAt, user.username FROM comment INNER JOIN user ON comment.userId = user.userId $action ";
+        $sql = "SELECT $this->table.commentId, $this->table.userId, $this->table.articleId, $this->table.content, $this->table.isValid, $this->table.updatedAt,$this->table.createdAt, user.username FROM $this->table INNER JOIN user ON $this->table.userId = user.userId $action ";
         $result = $this->pdo->query($sql);
         if (!$result) {
             throw new Exception("impossible to do the request !!");            
         }
         return  $result->fetchAll();
     }
+
+    public function findCommentsToValidate(string $action = "")
+    {
+        $action = "WHERE $this->table.isValid = 0";
+        $sql = "SELECT $this->table.commentId, $this->table.userId, $this->table.articleId, $this->table.content, $this->table.isValid, $this->table.updatedAt,$this->table.createdAt, article.title FROM $this->table INNER JOIN article ON $this->table.articleId = article.articleId $action ";
+        $result = $this->pdo->query($sql);
+        if (!$result) {
+            throw new Exception("impossible to do the request !!");            
+        }
+        return  $result->fetchAll();
+    }
+
 
     /**
      * function that create a comment in article
@@ -58,7 +70,7 @@ class Comment extends Model
         $sql = " UPDATE $this->table 
         SET isValid = 1,
             updatedAt = NOW()
-        WHERE $tableId = comment:commentId ";
+        WHERE $tableId = :commentId ";
         $query = $this->pdo->prepare($sql);
         $result = $query->execute(compact('commentId'));
         if (!$result) {
@@ -66,19 +78,5 @@ class Comment extends Model
         }
     }
     
-    /* public function getCommentsbyArticleId(int $articleId, string $options=null)
-    {
-        $sql = " SELECT * FROM $this->table WHERE articleId = :articleId $options"; 
-        $query = $this->pdo->prepare($sql);
-        $query->execute(['articleId' => $articleId]);
-        return $query->fetchAll();
-        
-    } */
-
-    //recuperer le nom du user (jointure)
-    public function getUsername()
-    {
-        
-    }
 
 }

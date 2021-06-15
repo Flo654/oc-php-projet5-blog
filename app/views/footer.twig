@@ -16,8 +16,8 @@
                     <a class="instagram" target="_blank" href="https://github.com/Flo654/"><i class="icon-social-github"></i></a>
                   </li>
                 </ul>
-                {% if isConnected == false or isAdmin == true %}             
-                <a href="/admin" data-toggle="modal" data-target="#exampleModal">back office Administration</a>              
+                {% if (isConnected == true) and (isAdmin)  %}             
+                <a href="/admin" >back office Administration</a>              
                 {% endif %}             
               </div>
             </div>
@@ -34,6 +34,13 @@
       var articleId = button.data('whatever') // Extract info from data-* attributes
       var modal = $(this)      
       modal.find('#testy').attr( "href", "/deleteArticle-" + articleId );
+       })
+    </script>
+    <script>$('#confirmModal2').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      var commentId = button.data('whatever') // Extract info from data-* attributes
+      var modal = $(this)      
+      modal.find('#commentId').attr( "value", commentId );
        })
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>

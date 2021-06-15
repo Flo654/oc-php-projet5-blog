@@ -1,5 +1,7 @@
 <?php
 require_once '../vendor/autoload.php';
+
+use App\controllers\Render;
 use App\controllers\Router;
 
 $whoops = new \Whoops\Run;
@@ -11,7 +13,6 @@ session_start();
 
 
 $router = new Router;
-
 try {
     ////////////////////////////////////////////////////////
     /////////////////////// ROUTES//////////////////////////
@@ -22,7 +23,9 @@ try {
     $router->post('logout', 'createUserController');
     $router->post('createArticle', 'CreateArticleController');
     $router->post('createComment', 'CreateCommentController');
-    $router->post('modifyArticle', 'modifyCommentController');
+    $router->post('modifyArticle', 'modifyCommentController');//modify
+    $router->post('validateComment', 'validateComment');//modify
+    $router->post('deleteComment', 'deleteComment');//delete
 
     ////////////////FRONT OFFICE ROUTE//////////////////////
 
@@ -34,12 +37,19 @@ try {
     ////////////////BACK OFFICE ROUTE///////////////////////
     ////////////////////////////////////////////////////////
 
-    $router->get('/article', 'articleController');
     $router->get('/admin', 'adminController');
-    $router->get('/postList', 'adminPostList');
-    $router->get('/backArticle-:id', 'modifyController');
-    $router->get('/deleteArticle-:id', 'deleteController');
+    $router->get('/admin/article/create', 'articleController');    
+    $router->get('/admin/comments', 'commentsController');
+    $router->get('/admin/postList', 'adminPostList');
+    $router->get('/backArticle-:id', 'modifyController');//modify
+    $router->get('/deleteArticle-:id', 'deleteController');//delete
+
 } catch (Exception $e) {
-    echo"une erreur a été levée: ", $e->getMessage();
+
+     $errorMessage = $e->getMessage();
+     $errorCode = $e->getCode();
+     $render = new Render;
+     $render->errorMessage($errorMessage, $errorCode); 
+
 }
 
