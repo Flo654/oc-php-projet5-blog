@@ -26,10 +26,9 @@ class Comment {
             throw new Exception( "please, fill all the fields ");
         }
         $commentModel = new ModelsComment();           
-        $comment = $commentModel->create( $userId, $articleId, $content);
-        if ( !$comment) {            
-            throw new Exception( "impossible to record data");
-        }      
+        $commentModel->create( $userId, $articleId, $content);
+        return;
+             
     }    
 
        
