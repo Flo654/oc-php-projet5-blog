@@ -1644,16 +1644,6 @@ span {
 	}
 }
 
-@-ms-keyframes loading {
-	from {
-		left: 0;
-	}
-
-	to {
-		left: 100%;
-	}
-}
-
 @-o-keyframes loading {
 	from {
 		left: 0;
