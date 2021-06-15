@@ -1,0 +1,48 @@
+
+{% block blog %}
+    <!-- blog Section -->
+    <section id="portfolios" class="section-padding">
+        <!-- Container Starts -->
+        <div class="container ">
+            <div class=" d-flex center-block">
+                <img src="/assets/img/gallery/blog-logo.png" class="col-md-4 d-block mx-auto"alt="blog"  >
+            </div>                
+            <h2 class="section-title wow flipInX" data-wow-delay="0.4s">The latest Articles</h2>
+            <div class="row">          
+                <div class="col-md-12">
+                    <!-- Portfolio Controller/Buttons -->
+                    <div class="controls text-center">
+                        <a class="filter active btn btn-common" data-filter="all">All</a>
+                        <a class="filter btn btn-common" data-filter=".design">Design</a>
+                        <a class="filter btn btn-common" data-filter=".development">Development</a>
+                        <a class="filter btn btn-common" data-filter=".print">Print</a>
+                    </div>
+                    <!-- Portfolio Controller/Buttons Ends-->
+                </div>
+
+                <!-- blog articles -->
+                <div id="portfolio" class="row wow fadeInDown pb-4 mb-4" data-wow-delay="0.4s">
+                    {% for article in articles %}
+                        <div class="col-sm-6 col-md-4 col-lg-4 col-xl-4  mix development print">              
+                            <div class="card" >
+                                <img src="assets/img/gallery/img-{{article.articleId}}.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{article.title}}</h5>
+                                    <small>{{article.updatedAt}}</small>
+                                    <p class="card-text">{{article.chapo}}</p>
+                                    
+                                    <a href="index.php?id={{article.articleId}}" class="btn btn-common" >
+                                        Lire la suite...
+                                    </a>
+                                </div>
+                            </div>  
+                        </div>
+
+                    {% endfor %}               
+                </div>
+            </div>
+        </div>
+        <!-- Container Ends -->
+    </section >
+    <!-- blog Section Ends --> 
+{% endblock %}

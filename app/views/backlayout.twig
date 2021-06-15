@@ -1,0 +1,75 @@
+{% include "header.twig" %}
+
+{% block navbar %} 
+    {% include "navbar.twig" %} 
+{% endblock %}
+{% if isAdmin %}
+
+<!-- Services Section Start -->
+    <section id="services" class=" section-padding top  ">
+      
+        <div class="container topp bot">
+            <div class="row ">
+                <!-- Services item -->
+                <div class="col-md-6 col-lg-6 col-xs-12 mb-4">
+                    <div class="services-item ">
+                    <div class="icon">
+                        <i class="fas fa-folder-plus"></i>
+                    </div>
+                    <div class="services-content">
+                        <h3><a href="admin/article/create">create article</a></h3>
+                        
+                    </div>
+                    </div>
+                </div>
+                <!-- Services item -->
+                <div class="col-md-6 col-lg-6 col-xs-12 mb-4">
+                    <div class="services-item wow fadeInDown" data-wow-delay="0.6s">
+                    <div class="icon">
+                        <i class="far fa-newspaper"></i>
+                    </div>
+                    <div class="services-content">
+                        <h3><a href="/admin/postList">My blog posts</a></h3>
+                        
+                    </div>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="row">
+
+                <!-- Services item -->
+                <div class="col-md-6 col-lg-6 col-xs-12 mb-4">
+                    <div class="services-item wow fadeInDown" data-wow-delay="0.9s">
+                    <div class="icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="services-content">
+                        <h3><a href="/admin/comments">Manage comments</a></h3>                    
+                    </div>
+                    </div>
+                </div>
+                <!-- Services item -->
+                <div class="col-md-6 col-lg-6 col-xs-12">
+                    <div class="services-item wow fadeInDown" data-wow-delay="1.2s">
+                    <div class="icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="services-content">
+                        <h3><a href="#">contact messages</a></h3>
+                        
+                    </div>
+                    </div>
+                </div>
+            
+            
+            
+            
+            
+            </div>
+        </div>
+    </section>
+    <!-- Services Section End -->
+
+{% endif %}
+{% include "footer.twig" %}

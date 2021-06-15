@@ -1,0 +1,47 @@
+{% extends "layout.twig" %}
+
+{% block navbar %} 
+{% include "navbarBlog.twig" %} 
+{% endblock %}
+
+{% block content %} 
+	
+    <main class="site-main">       
+        <!-- Page Content -->
+        <div class="container-fluid no-left-padding no-right-padding page-content top">
+            <!-- Container -->
+            <div class="container">
+                <div class="contact-info">
+                    <img src="assets/img/gallery/coach-professionnel.jpg" alt="contact">
+                    <div class="block-title">
+                        <h3>Contact Us</h3>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form class="row">
+                        <div class="col-md-6 form-group">
+                            <input type="text" class="form-control" placeholder="Your Name (required)" name="contact-name" id="input_name" required>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <input type="text" class="form-control" placeholder="Your Email (required)" name="contact-email" id="input_email" required>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control" placeholder="Subject" name="contact-subject" id="input_subject">
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <textarea class="form-control mess" placeholder="Your message..." rows="8" name="textarea-message" id="textarea_message"></textarea>
+                        </div>
+                        <div class="col-md-12 form-group no-bottom-margin">
+                            <button id="btn_submit" name="submit" class="submit">Send</button>
+                        </div>
+                        <div id="alert-msg" class="alert-msg"></div>
+                    </form>
+                </div>
+            </div><!-- Container /- -->
+        </div><!-- Page Content /- -->	
+    </main>
+		
+
+
+
+{% endblock %}

@@ -1,5 +1,6 @@
 <?php
 namespace App\models;
+use Exception;
 
 class User extends Model
 {
@@ -19,13 +20,7 @@ class User extends Model
         $result = $this->pdo->prepare($sql);
         $result->execute(['username'=> $username, 'email'=> $email]);
         $data = $result->fetch();
-        
-        if (!$data['email'] and !$data['username']) {
-            return true;
-        }
-        return false;
-
-        //return (!$data['email'] and !$data['username']) ? true : false;
+        return (!$data->email and !$data->username) ? true : false;
     }
 
     /**
@@ -41,10 +36,8 @@ class User extends Model
         //we verify if username and email are already in database
         $result = $this->isDatasAlreadyInDb($username, $email);
         if(!$result){
-            echo "username or email already existing !!";
-            return;
+            throw new Exception("username or email already existing, please change !!");            
         }
-
         $sql = " INSERT INTO $this->table
         SET username = :username, 
             email = :email, 
@@ -53,7 +46,10 @@ class User extends Model
             createdAt = NOW(),
             updatedAt = NOW()";
         $query = $this->pdo->prepare($sql);
-        $query->execute(compact('username', 'email', 'password'));
+        $result = $query->execute(compact('username', 'email', 'password'));
+        if (!$result) {
+            throw new Exception("impossible to do this request !!");            
+        }
     }
 
     /**
@@ -71,10 +67,13 @@ class User extends Model
         updatedAt = NOW()
         WHERE $tableId = $itemId ";
         $query = $this->pdo->prepare($sql);
-        $query->execute(compact('password'));
+        $result = $query->execute(compact('password'));
+        if (!$result) {
+            throw new Exception("impossible to do the request !!");            
+        }
     }
     
-    public function updateIsAdmin(int $itemId, bool $isAdmin = 1)
+    /* public function updateIsAdmin(int $itemId, bool $isAdmin = 1)
     {
         $tableId = $this->table . 'Id';
         $sql = " UPDATE $this->table 
@@ -83,6 +82,28 @@ class User extends Model
         WHERE $tableId = $itemId ";
         $query = $this->pdo->prepare($sql);
         $query->execute(compact('isAdmin'));
-    }
+    } */
     
+    public  function login(string $email, string $password) 
+    {
+          
+        $sql = "SELECT * FROM user WHERE email = :email";
+        $result = $this->pdo->prepare($sql);
+        $result->execute(['email'=> $email]);
+        $user = $result->fetch();
+        // on verifie si le mail existe dans la base
+        if(!$user)
+        {
+            throw new Exception("your email is not the good one, please fill a good email",404);
+            return;                
+        }
+        //on verifie si le mot de passe est correct
+        if (!password_verify($password, $user->password)) 
+        {
+            throw new Exception ("your password is incorrect", 404);
+            return;
+        }           
+        return  $user;      
+    }
+
 }

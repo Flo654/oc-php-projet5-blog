@@ -1,0 +1,26 @@
+<!-- Modal HTML -->
+<div id="logoutModal" class="modal fade topp">
+	<div class="modal-dialog modal-confirm">
+		<div class="modal-content">
+			<div class="modal-header flex-column">
+				<div class="icon-box">
+					<i class="material-icons">&#xE5CD;</i>
+				</div>						
+				<h4 class="modal-title w-100">Are you sure?</h4>	
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			</div>
+			<div class="modal-body">
+				<p>Do you really want to disconnect ?</p>
+			</div>
+			<div class="modal-footer justify-content-center">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+				<form method="post" id="logout" action="/home">																	
+					<div class="form-group">
+						<button type="submit" name="submit" value="logout" class="btn btn-danger">logout</button>
+					</div>
+				</form>
+				
+			</div>
+		</div>
+	</div>
+</div>     
