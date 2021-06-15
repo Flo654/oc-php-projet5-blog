@@ -6,78 +6,78 @@ html {
 
 body {
   background: #fff;
- font-size: 14px;
- font-weight: 400;
- font-family: "Source Sans Pro", sans-serif;
- -webkit-box-sizing: border-box;
- -moz-box-sizing: border-box;
- box-sizing: border-box;
- -webkit-font-smoothing: subpixel-antialiased;
- color: #666;
- line-height: 25px;
- -webkit-backface-visibility: hidden;
- backface-visibility: hidden;
- overflow-x: hidden;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: "Source Sans Pro", sans-serif;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-font-smoothing: subpixel-antialiased;
+  color: #666;
+  line-height: 25px;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  overflow-x: hidden;
 	}
 
 h1,
 h2,
 h3,
 h4 {
-	font-size: 30px;
-	font-weight: 700;
-	font-family: "Source Sans Pro", sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  font-family: "Source Sans Pro", sans-serif;
 }
 
 .script-font {
-	font-family: 'Shadows Into Light', cursive;
+  font-family: 'Shadows Into Light', cursive;
 }
 
 nav {
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 a {
-	-webkit-transition: all 0.2s linear;
-	-moz-transition: all 0.2s linear;
-	-o-transition: all 0.2s linear;
-	transition: all 0.2s linear;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
 }
 
 a:hover {
-	text-decoration: none;
+  text-decoration: none;
 }
 
 a a:focus {
-	outline: none;
+  outline: none;
 }
 
 p {
-	font-weight: 400;
-	font-family: "Source Sans Pro", sans-serif;
-	margin: 0px;
-	font-size: 14px;
+  font-weight: 400;
+  font-family: "Source Sans Pro", sans-serif;
+  margin: 0;
+  font-size: 14px;
 }
 
 .theicon {
-	font-size: 4rem;
+  font-size: 4rem;
 }
 
 .bottom {
-	margin-bottom: 12rem;	
+  margin-bottom: 12rem;	
 }
 
 .jumbotron {
-	background-color: #fff;
-	position: absolute;
-	top: 25%;
-	left: 50%;
-	transform: translateY(-50%);
-	transform: translateX(-50%);
+  background-color: #fff;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
 }
 
 .topp {
-		margin-top: 8rem;
+  margin-top: 8rem;
 }
 
 .bot {
@@ -90,31 +90,31 @@ p {
 
 ul,
 ol {
-	list-style: outside none none;
-	margin: 0;
-	padding: 0;
+  list-style: outside none none;
+  margin: 0;
+  padding: 0;
 }
 
 ul li,
 ol li {
-	list-style: none;
+  list-style: none;
 }
 
 .hero-heading {
-	font-size: 48px;
-	font-weight: 700;
-	color: #fff;
-	text-transform: capitalize;
-	line-height: 70px;
-	letter-spacing: 0.1rem;
+  font-size: 48px;
+  font-weight: 700;
+  color: #fff;
+  text-transform: capitalize;
+  line-height: 70px;
+  letter-spacing: 0.1rem;
 }
 
 .hero-sub-heading {
-	font-size: 20px;
-	font-weight: 400;
-	color: #e6e6e6;
-	line-height: 45px;
-	letter-spacing: 0.1rem;
+  font-size: 20px;
+  font-weight: 400;
+  color: #e6e6e6;
+  line-height: 45px;
+  letter-spacing: 0.1rem;
 }
 
 .section-titile-bg {
@@ -239,20 +239,20 @@ button:focus {
 }
 
 .social-icon li a {
-	color: #000;
-	background: #fff;
-	width: 35px;
-	height: 35px;
-	line-height: 38px;
-	display: block;
-	text-align: center;
-	border-radius: 100%;
-	font-size: 16px;
-	margin: 15px 6px 12px 6px;
-	transition: all 0.3s ease-in-out 0s;
-	-moz-transition: all 0.3s ease-in-out 0s;
-	-webkit-transition: all 0.3s ease-in-out 0s;
-	-o-transition: all 0.3s ease-in-out 0s;
+  color: #000;
+  background: #fff;
+  width: 35px;
+  height: 35px;
+  line-height: 38px;
+  display: block;
+  text-align: center;
+  border-radius: 100%;
+  font-size: 16px;
+  margin: 15px 6px 12px 6px;
+  transition: all 0.3s ease-in-out 0s;
+  -moz-transition: all 0.3s ease-in-out 0s;
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  -o-transition: all 0.3s ease-in-out 0s;
 }
 
 .social-icon li a:hover {
