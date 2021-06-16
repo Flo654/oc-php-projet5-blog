@@ -458,7 +458,6 @@ img {
   padding: 0 20px 0 30px;
 }
 
-
 .services-item .icon i {
   font-size: 42px;
   text-align: center;
@@ -555,7 +554,7 @@ img {
 }
 
 .top-nav-collapse .navbar-nav li.active a.nav-link {
-  color: #00b4d9 ;
+  color: #00b4d9;
 }
 
 .indigo {
@@ -1280,7 +1279,7 @@ img {
 }
 
 /* - max-width: 575 */
-@media (max-width: 575px) {	
+@media (max-width: 575px) {
   .subscribe-block .container > form .input-group {
     display: inline-block;
     width: 100%;
