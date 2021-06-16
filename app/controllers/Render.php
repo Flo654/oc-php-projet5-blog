@@ -21,12 +21,11 @@ class  Render
     ////////////////FRONT OFFICE ROUTE//////////////////////
     ////////////////////////////////////////////////////////
 
-    public  function home()
-    {        
-       print_r( $this->twig->render('home.twig', ['isConnected'=> $this->isAdmin['isConnected'], 'username' => $this->isAdmin['username'], 'isAdmin' => $this->isAdmin['isAdmin']]));
+   
+    public function display($page){
+        print_r($this->twig->render("$page.twig", ['isConnected'=> $this->isAdmin['isConnected'], 'username' => $this->isAdmin['username'], 'isAdmin' => $this->isAdmin['isAdmin']]));
         return;
     }
-
     public  function errorPage()
     {        
        print_r( $this->twig->render('404.twig', ['isConnected'=> $this->isAdmin['isConnected'] ]));
@@ -60,11 +59,6 @@ class  Render
         return;
     }
 
-    public function contact()
-    {
-        print_r($this->twig->render('contact.twig', ['isConnected'=> $this->isAdmin['isConnected'], 'username' => $this->isAdmin['username'], 'isAdmin' => $this->isAdmin['isAdmin']]));
-        return;
-    }
 
     /////////////////////////////////////////////////////////
     ////////////////BACK OFFICE ROUTE///////////////////////

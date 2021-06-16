@@ -96,7 +96,7 @@ try {
         return;
     }
     if ($uri === 'home'){        
-        $render->home();
+        $render->display('home');
         return;
     }
     if ($uri ==='blog'){        
@@ -104,7 +104,7 @@ try {
         return;
     }
     if ($uri === 'contact'){
-        $render->contact();
+        $render->display('contact');
         return;
     }
     if ($uri === 'admin'){
