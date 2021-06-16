@@ -45,7 +45,7 @@
   .counter-section .counter p {
     font-size: 14px;
   }
-} 
+}
 
 @media (max-width: 767px) {
   .section-title {
@@ -100,5 +100,4 @@
   h4 {
     font-size: 1.5rem;
   }
-}
- 
+} 
