@@ -87,7 +87,10 @@ p {
 .top {
 	margin-top: 2rem;
 }
-
+.page-content {
+	margin-top: 120px;
+	margin-bottom: 120px;
+}
 ul,
 ol {
   list-style: outside none none;

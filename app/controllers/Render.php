@@ -39,7 +39,7 @@ class  Render
         return;
     }
 
-    public function postList()
+    public function blog()
     {
         
         $model = new Article();

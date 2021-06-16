@@ -13,10 +13,6 @@ class Comment {
      */
     public function insertComment()
     {       
-        //on verifie que le user est connect
-        if (! $_SESSION['isConnected']){
-            throw new Exception("user not connected");            
-        }
         //on recupere le userId dans $_SESSION
         $userId = (int) $_SESSION['user']->userId;
         $articleId = (int)filter_input(INPUT_POST, 'articleId', FILTER_SANITIZE_NUMBER_INT);

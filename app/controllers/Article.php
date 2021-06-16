@@ -40,9 +40,10 @@ class Article
         return ['article'=>$article, 'comments'=>$comments];        
     }
     
-    public function deleteArticle($articleId)
+    public function deleteArticle()
     {
         //recuperer l'id de l'article
+        $articleId = (int) filter_input(INPUT_POST, 'articleId',FILTER_SANITIZE_STRING);
         $model = new ModelsArticle();
         $model->delete($articleId);
         // verifier que le user est admin

@@ -73,8 +73,6 @@ abstract class Model
         $sql = "DELETE FROM $this->table WHERE $tableId = :id";
         $result = $this->pdo->prepare($sql);
         $result->execute(['id' => $itemId]);
-        if (!$result) {
-            throw new Exception("impossible to do the request !!");            
-        }
+        
     }    
 }
