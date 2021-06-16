@@ -105,6 +105,7 @@ try {
     }
     if ($uri === 'contact'){
         $render->contact();
+        return;
     }
     if ($uri === 'admin'){
         $render->admin();
