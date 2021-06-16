@@ -231,7 +231,7 @@ ol li {
 }
 
 button:focus {
-  outline: none !important;
+  outline: none ;
 }
 
 .icon-close,
@@ -260,6 +260,11 @@ button:focus {
   -o-transition: all 0.3s ease-in-out 0s;
 }
 
+
+.modal-confirm .modal-footer a {
+  color: #999;
+}
+
 .social-icon li a:hover {
   color: #fff;
 }
@@ -286,6 +291,11 @@ button:focus {
 
 .section-padding {
   padding: 60px 0;
+}
+
+
+.top-nav-collapse .navbar-brand img {
+  width: 65%;
 }
 
 #about .img-thumb img {
@@ -372,16 +382,6 @@ button:focus {
   line-height: 18px;
 }
 
-.timeline li:first-child::before {
-  border: 0;
-  background: none;
-  position: relative;
-}
-
-.timeline li:last-child {
-  padding: 0 20px 0 30px;
-}
-
 .timeline li::before {
   content: "";
   border: solid 2px;
@@ -397,7 +397,28 @@ button:focus {
   display: block;
   position: absolute;
   margin-top: 18px;
-  border-color: #00b4d9 !important;
+  border-color: #00b4d9;
+}
+
+.timeline li:first-child::before {
+  border: 0;
+  background: none;
+  position: relative;
+}
+
+.timeline li:last-child {
+  padding: 0 20px 0 30px;
+}
+
+
+.services-item .icon i {
+  font-size: 42px;
+  text-align: center;
+  width: 48px;
+  display: block;
+  margin: 0 auto;
+  height: 48px;
+  color: #00b4d9;
 }
 
 .timeline li:first-child i {
@@ -439,7 +460,7 @@ button:focus {
 
 .top-nav-collapse {
   z-index: 999999;
-  top: 0 !important;
+  top: 0 ;
   min-height: 58px;
   box-shadow: 0 3px 6px 3px rgba(0, 0, 0, 0.06);
   -webkit-animation-duration: 1s;
@@ -448,30 +469,26 @@ button:focus {
   animation-fill-mode: both;
   -webkit-animation-name: fadeInDown;
   animation-name: fadeInDown;
-  background: #fff !important;
+  background: #fff ;
 }
 
 .top-nav-collapse .navbar-brand {
   top: 0;
 }
 
-.top-nav-collapse .navbar-brand img {
-  width: 65%;
-}
-
 .top-nav-collapse .navbar-nav .nav-link {
-  color: #333 !important;
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
+  color: #333 ;
+  margin-top: 0 ;
+  margin-bottom: 0 ;
 }
 
 .top-nav-collapse .navbar-nav .nav-link:hover {
   cursor: pointer;
-  color: #00b4d9 !important;
+  color: #00b4d9 ;
 }
 
 .top-nav-collapse .navbar-nav li.active a.nav-link {
-  color: #00b4d9 !important;
+  color: #00b4d9 ;
 }
 
 .indigo {
@@ -489,6 +506,12 @@ button:focus {
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
+}
+
+
+.services-item .services-content h3 {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .navbar-expand-lg .navbar-nav .nav-link i:hover {
@@ -539,7 +562,6 @@ button:focus {
   #mobile-menu {
     display: none;
   }
-
 }
 
 /* ==========================================================================
@@ -580,6 +602,10 @@ button:focus {
   letter-spacing: 10px;
   text-transform: uppercase;
   font-weight: 700;
+}
+
+.services-item .services-content p {
+  line-height: 22px;
 }
 
 #hero-area .contents p {
@@ -629,21 +655,6 @@ button:focus {
   -o-transition: all 0.3s ease-in-out 0s;
 }
 
-.services-item .icon i {
-  font-size: 42px;  
-  text-align: center;
-  width: 48px;
-  display: block;
-  margin: 0 auto;
-  height: 48px;
-  color: #00b4d9;
-}
-
-.services-item .services-content h3 {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
 .services-item .services-content h3 a {
   font-size: 18px;
   text-transform: uppercase;
@@ -652,10 +663,6 @@ button:focus {
 
 .services-item .services-content h3 a:hover {
   color: #00b4d9;
-}
-
-.services-item .services-content p {
-  line-height: 22px;
 }
 
 .services-item:hover {
@@ -736,15 +743,6 @@ button:focus {
   background: #1c1c20;
 }
 
-.footer-area .footer-text p a {
-  color: #00b4d9;
-}
-
-.footer-area .footer-text .nav-inline .nav-link {
-  padding: 11px 7px;
-  color: #888;
-}
-
 .modal-confirm {
   color: #636363;
   width: 400px;
@@ -785,10 +783,6 @@ button:focus {
   border-radius: 5px;
   font-size: 13px;
   padding: 10px 15px 25px;
-}
-
-.modal-confirm .modal-footer a {
-  color: #999;
 }
 
 .modal-confirm .icon-box {

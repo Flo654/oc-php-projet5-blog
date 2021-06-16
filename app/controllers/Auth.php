@@ -3,6 +3,7 @@
 namespace App\controllers;
 
 use App\models\User;
+use App\SuperGlobals;
 use Exception;
 
 class Auth
@@ -19,7 +20,10 @@ class Auth
 
         if(session_status() === PHP_SESSION_NONE){
             session_start();
-        }                
+        }  
+        $test = new SuperGlobals;
+        $test->setSuperGlobals('user', $user);
+        $test->setSuperGlobals('isConnected', true);
         $_SESSION['user']= $user;
         $_SESSION['isConnected'] = true;       
     }
