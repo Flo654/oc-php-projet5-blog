@@ -231,7 +231,7 @@ ol li {
 }
 
 button:focus {
-  outline: none ;
+  outline: none;
 }
 
 .icon-close,
@@ -320,7 +320,6 @@ button:focus {
 .section-padding {
   padding: 60px 0;
 }
-
 
 .top-nav-collapse .navbar-brand img {
   width: 65%;
@@ -528,7 +527,7 @@ img {
 
 .top-nav-collapse {
   z-index: 999999;
-  top: 0 ;
+  top: 0;
   min-height: 58px;
   box-shadow: 0 3px 6px 3px rgba(0, 0, 0, 0.06);
   -webkit-animation-duration: 1s;
@@ -537,7 +536,7 @@ img {
   animation-fill-mode: both;
   -webkit-animation-name: fadeInDown;
   animation-name: fadeInDown;
-  background: #fff ;
+  background: #fff;
 }
 
 .top-nav-collapse .navbar-brand {
@@ -545,14 +544,14 @@ img {
 }
 
 .top-nav-collapse .navbar-nav .nav-link {
-  color: #333 ;
-  margin-top: 0 ;
-  margin-bottom: 0 ;
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .top-nav-collapse .navbar-nav .nav-link:hover {
   cursor: pointer;
-  color: #00b4d9 ;
+  color: #00b4d9;
 }
 
 .top-nav-collapse .navbar-nav li.active a.nav-link {
@@ -1633,11 +1632,11 @@ img {
 }
 
 .trash {
-	color: #dc3545;
+  color: #dc3545;
 }
 
 .card {
-box-shadow: 0 0 10px rgb(0 0 0 / 20%)
+  box-shadow: 0 0 10px rgb(0 0 0 / 20%)
 }
 
 .card-title {
@@ -1646,7 +1645,7 @@ box-shadow: 0 0 10px rgb(0 0 0 / 20%)
 }
 
 .submit {
-  border-style:none;
+  border-style: none;
   background-color: #fff;
 }
 
