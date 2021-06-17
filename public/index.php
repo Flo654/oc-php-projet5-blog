@@ -1,21 +1,20 @@
 <?php
+
 require_once '../vendor/autoload.php';
+
 
 use App\controllers\Article;
 use App\controllers\Auth;
 use App\controllers\Comment;
 use App\controllers\Render;
-use App\controllers\Router;
+use App\controllers\Message;
 use App\controllers\User;
 
-/* $whoops = new \Whoops\Run;
+$whoops = new \Whoops\Run;
 $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 $whoops->register();
- */
 
- 
 session_start();
-
 
 $render = new Render;
 
@@ -23,7 +22,7 @@ try {
     $submit = filter_input(INPUT_POST,('submit'));
     switch ($submit) {
         case 'signIn':
-            Auth::auth();
+            Auth::session();
             header("Refresh: 0");
             break;
         
@@ -65,6 +64,12 @@ try {
         case 'deleteComment':                                      
             $model = new Comment;
             $model->deleteComment();                                  
+            break;
+
+        case 'postMessage':
+            
+            $message = new Message;
+            $message->sendMessage();
             break;
     }
 } catch (Exception $e) {

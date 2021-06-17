@@ -18,7 +18,7 @@
                     </div>
                 </div>
                 <div class="contact-form">
-                    <form class="row">
+                    <form class="row" method="post" action="/home">
                         <div class="col-md-6 form-group">
                             <input type="text" class="form-control" placeholder="Your Name (required)" name="contact-name" id="input_name" required>
                         </div>
@@ -26,13 +26,13 @@
                             <input type="text" class="form-control" placeholder="Your Email (required)" name="contact-email" id="input_email" required>
                         </div>
                         <div class="col-md-12 form-group">
-                            <input type="text" class="form-control" placeholder="Subject" name="contact-subject" id="input_subject">
+                            <input type="text" class="form-control" placeholder="Subject (required)" name="contact-subject" id="input_subject" required>
                         </div>
                         <div class="col-md-12 form-group">
-                            <textarea class="form-control mess" placeholder="Your message..." rows="8" name="textarea-message" id="textarea_message"></textarea>
+                            <textarea class="form-control mess" placeholder="Your message..." rows="8" name="contact-message" id="textarea_message" required ></textarea>
                         </div>
                         <div class="col-md-12 form-group no-bottom-margin">
-                            <button id="btn_submit" name="submit" class="submit">Send</button>
+                            <button id="btn_submit" name="submit" value="postMessage"class="submit">Send</button>
                         </div>
                         <div id="alert-msg" class="alert-msg"></div>
                     </form>

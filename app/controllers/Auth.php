@@ -2,16 +2,23 @@
 
 namespace App\controllers;
 
+use App\controllers\superGlobals\GetGlobals;
 use App\models\User;
 use App\SuperGlobals;
 use Exception;
 
 class Auth
-{
-    public static function auth()
+{ 
+    private static function instance()
+    {
+        return new GetGlobals;
+    }
+    
+    private  static function auth()
     {        
         $password = filter_input(INPUT_POST,"password"); 
         $email = filter_input(INPUT_POST,"email");
+        if (!$password && !$email){return;}
         $userModel = new User();
         $user = $userModel->login($email, $password);
         if(!$user){
@@ -20,12 +27,17 @@ class Auth
 
         if(session_status() === PHP_SESSION_NONE){
             session_start();
-        }  
-        $test = new SuperGlobals;
-        $test->setSuperGlobals('user', $user);
-        $test->setSuperGlobals('isConnected', true);
-        $_SESSION['user']= $user;
-        $_SESSION['isConnected'] = true;       
+        }
+        return $user ?? null;
+    }
+
+    public static function session () {
+        $user = self::auth();   
+        if ($user == null){return;}
+        self::instance()->setSession('user', $user);
+        self::instance()->setSession('isConnected', true);
+        
+        return self::instance()->getVariables();
     }
 
     public static function logout()
@@ -41,13 +53,16 @@ class Auth
 
     public static function checkIfIsAdmin()
     {
-        if (empty($_SESSION)){
-        return false;
+        
+        $test = self::instance()->getVariables();
+        if ($test){
+            $username = $test['user']->username;
+            $isAdmin = $test['user']->isAdmin;
+            $isConnected = $test['isConnected'];
+            
         }
-        $username = $_SESSION['user']->username;
-        $isAdmin =  $_SESSION['user']->isAdmin;
-        $isConnected = $_SESSION['isConnected']; 
-        return (!$isConnected) ?  false : ['username' => $username, 'isAdmin' => $isAdmin, 'isConnected' => $isConnected];
+        
+        return (!$test) ?  false : ['username' => $username, 'isAdmin' => $isAdmin, 'isConnected' => $isConnected];
     }
 
 }
