@@ -24,7 +24,7 @@ class  FrontRender
     ////////////////////////////////////////////////////////
 
     private function printe($data){
-        echo $data;
+        print_r($data);
         return;
     }
    
