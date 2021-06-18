@@ -71,7 +71,8 @@ try {
             $model->deleteComment();                                  
             break;
 
-        case 'postMessage':            
+        case 'postMessage':
+            include '../credential.php' ;          
             $message = new Message;
             $message->sendMessage();
             break;

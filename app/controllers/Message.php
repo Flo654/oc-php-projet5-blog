@@ -25,9 +25,9 @@ class Message
 
         // Create a message
         $message = (new Swift_Message($subject))
-        ->setFrom([EMAIL => 'message from the blog'])
-        ->setTo([$email => $name])
-        ->setBody($content)
+        ->setFrom([EMAIL => 'message from my blog'])
+        ->setTo([EMAIL])
+        ->setBody("from: $name" . '<br>' . "email: $email" . '<br>' . "message: $content ".'<br>' , 'text/html')
         ;
 
         // Send the message
