@@ -5,7 +5,9 @@ require_once '../vendor/autoload.php';
 
 use App\controllers\Article;
 use App\controllers\Auth;
+use App\controllers\BackRender;
 use App\controllers\Comment;
+use App\controllers\FrontRender;
 use App\controllers\Render;
 use App\controllers\Message;
 use App\controllers\User;
@@ -16,18 +18,21 @@ $whoops->register();
 
 session_start();
 
-$render = new Render;
+$frontRender = new FrontRender;
+$backRender = new BackRender;
 
 try {
     $submit = filter_input(INPUT_POST,('submit'));
     switch ($submit) {
         case 'signIn':
-            Auth::session();
+            $auth = new Auth;
+            $auth->session();
             header("Refresh: 0");
             break;
         
         case 'logout':
-            Auth::logout(); 
+            $auth = new Auth;
+            $auth->logout(); 
             header("Refresh: 0");                
             break;
 
@@ -66,8 +71,7 @@ try {
             $model->deleteComment();                                  
             break;
 
-        case 'postMessage':
-            
+        case 'postMessage':            
             $message = new Message;
             $message->sendMessage();
             break;
@@ -76,8 +80,7 @@ try {
 
     $errorMessage = $e->getMessage();
     $errorCode = $e->getCode();
-    $render = new Render;
-    $render->errorMessage($errorMessage, $errorCode); 
+    $frontRender->errorMessage($errorMessage, $errorCode); 
 
 }
 
@@ -101,15 +104,15 @@ try {
         return;
     }
     if ($uri === 'home'){        
-        $render->display('home');
+        $frontRender->display('home');
         return;
     }
     if ($uri ==='blog'){        
-        $render->blog();
+        $frontRender->blog();
         return;
     }
     if ($uri === 'contact'){
-        $render->display('contact');
+        $frontRender->display('contact');
         return;
     }
     if ($uri === 'admin'){
@@ -117,15 +120,15 @@ try {
         return;
     }
     if ($uri === 'admin/article/create'){
-        $render->article();
+        $backRender->article();
         return;
     }
     if ($uri === 'admin/postList'){
-        $render->adminPostList();
+        $backRender->adminPostList();
         return;
     }
     if ($uri === 'admin/comments'){
-        $render->commentController();
+        $backRender->commentController();
         return;
     }
     throw new Exception("Not Found !!", 404);
@@ -135,8 +138,7 @@ try {
 
      $errorMessage = $e->getMessage();
      $errorCode = $e->getCode();
-     $render = new Render;
-     $render->errorMessage($errorMessage, $errorCode); 
+     $frontRender->errorMessage($errorMessage, $errorCode); 
 
 }
 

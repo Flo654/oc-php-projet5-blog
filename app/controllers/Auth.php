@@ -14,7 +14,7 @@ class Auth
         return new GetGlobals;
     }
     
-    private  static function auth()
+    private function auth()
     {        
         $password = filter_input(INPUT_POST,"password"); 
         $email = filter_input(INPUT_POST,"email");
@@ -31,8 +31,8 @@ class Auth
         return $user ?? null;
     }
 
-    public static function session () {
-        $user = self::auth();   
+    public function session () {
+        $user = $this->auth();   
         if ($user == null){return;}
         self::instance()->setSession('user', $user);
         self::instance()->setSession('isConnected', true);
@@ -40,7 +40,7 @@ class Auth
         return self::instance()->getVariables();
     }
 
-    public static function logout()
+    public function logout()
     {
         if(session_status() !== PHP_SESSION_NONE)
         {
@@ -51,7 +51,7 @@ class Auth
     }
 
 
-    public static function checkIfIsAdmin()
+    public function checkIfIsAdmin()
     {
         
         $test = self::instance()->getVariables();
