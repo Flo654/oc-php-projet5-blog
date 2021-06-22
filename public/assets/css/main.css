@@ -863,8 +863,7 @@ img {
 }
 
 .modal-confirm {
-  color: #636363;
-  
+  color: #636363;  
   box-shadow: 0 0 10px rgb(0 0 0 / 20%);
 }
 
@@ -921,8 +920,9 @@ img {
 }
 
 .modal-confirm .icon-box2 {
-  border: 3px solid #28a745
+  border: 3px solid #28a745;
 }
+
 .modal-confirm .btn-secondary {
   background: #c1c1c1;
 }
