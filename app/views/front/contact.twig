@@ -6,19 +6,19 @@
 
 {% block content %} 
 	
-    <main class="site-main">       
+    <main class="site-main ">       
         <!-- Page Content -->
-        <div class="container-fluid no-left-padding no-right-padding page-content top">
+        <div class="container-fluid no-left-padding no-right-padding page-content top padding-20">
             <!-- Container -->
-            <div class="container">
-                <div class="contact-info">
-                    <img src="assets/img/gallery/coach-professionnel.jpg" alt="contact">
-                    <div class="block-title">
+            <div class="container ">
+                <div class="contact-info ">
+                   
+                    <div class="block-title ">
                         <h3>Contact Us</h3>
                     </div>
                 </div>
                 <div class="contact-form">
-                    <form class="row" method="post" action="/home">
+                    <form class="row" method="post" action="/checkModal">
                         <div class="col-md-6 form-group">
                             <input type="text" class="form-control" placeholder="Your Name (required)" name="contact-name" id="input_name" required>
                         </div>
@@ -44,4 +44,7 @@
 
 
 
+{% endblock %}
+{% block footer %}
+{% include "footer.twig" %}
 {% endblock %}

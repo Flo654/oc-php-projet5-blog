@@ -1,33 +1,6 @@
-{% block footer %}
-    <!-- Footer Section Start -->
-      <footer class="footer-area section-padding sticky-bottom">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="footer-text text-center wow fadeInDown" data-wow-delay="0.3s">
-                <ul class="social-icon">
-                  <li>
-                    <a class="facebook" target="_blank" href="https://www.facebook.com/florent.ascensio/"><i class="icon-social-facebook"></i></a>
-                  </li>
-                  <li>
-                    <a class="instagram" target="_blank" href="https://www.linkedin.com/in/florent-ascensio/"><i class="icon-social-linkedin"></i></a>
-                  </li>
-                  <li>
-                    <a class="instagram" target="_blank" href="https://github.com/Flo654/"><i class="icon-social-github"></i></a>
-                  </li>
-                </ul>
-                {% if (isConnected == true) and (isAdmin)  %}             
-                <a href="/admin" >back office Administration</a>              
-                {% endif %}             
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
-    <!-- Footer Section End -->
 
-
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+{% block script %}
+ <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script>$('#confirmModal').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget) // Button that triggered the modal

@@ -14,7 +14,7 @@ class  FrontRender
     
     public function __construct()
     {
-        $this->twig = new Environment (new FilesystemLoader('../app/views'));
+        $this->twig = new Environment (new FilesystemLoader(['../app/views/layout', '../app/views/components/modals components','../app/views/components/errors components','../app/views/front', '../app/views/front/components']));
         $this->auth = new Auth();
         $this->isAdmin = $this->auth->checkIfIsAdmin();
     }

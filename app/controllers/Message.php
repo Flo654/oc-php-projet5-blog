@@ -53,5 +53,6 @@ class Message
         }
 
         $this->transport($name, $email, $subject, $content);
+        return;
     }
 }

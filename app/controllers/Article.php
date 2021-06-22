@@ -11,7 +11,8 @@ class Article
     public function showArticles()
     {
         $modelArticle = new ModelsArticle();
-        $articles = $modelArticle->findAll();
+        $action = "ORDER BY  updatedAt DESC";
+        $articles = $modelArticle->findAll($action);
         if(!$articles){
             throw new Exception("impossible to load data !!");
         }
@@ -62,8 +63,8 @@ class Article
         $content = filter_input(INPUT_POST, 'content');
         $categoryId = (int)filter_input(INPUT_POST, 'category');
         $readTime = (int)filter_input(INPUT_POST, 'readTime');
-        $articleImage = filter_input(INPUT_POST, 'uploadImage');
-        $imgUrl = "/assets/img/gallery/$articleImage";        
+        $imgUrl = filter_input(INPUT_POST, 'uploadImage');
+                
         //on verifie que les champs soient bien remplis       
         if (!$author || !$title || !$chapo || !$content || !$readTime || !$categoryId || !$imgUrl) {            
             throw new Exception( "please fill all the fields !!!");

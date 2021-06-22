@@ -1,16 +1,16 @@
-{% include "header.twig" %}
+{% extends "layout.twig" %}
 
 {% block navbar %} 
     {% include "navbarBlog.twig" %} 
 {% endblock %}
 
+
+{% block content %}
 <div class="main-container">	
     <main class="site-main topp">
         <!-- Page Content -->
         <div class="container-fluid no-left-padding no-right-padding no-top-padding page-content ">
-            <div class="row justify-content-center topp">
-                <img src="{{article.imgUrl}}" class"topp" alt="Post" />
-            </div>
+            
             <!-- Container -->
             <div class="container">
                 <div class="row">
@@ -19,18 +19,18 @@
                         <article class="type-post">                        
                             <div class="entry-content">
                                 <div class="entry-header">	
-                                    <span class="post-category "><a href="#" title="Lifestyle">{{category.name}}</a></span>
-                                    <h3 class="entry-title text-uppercase">{{article.title}}</h3>
+                                    <span class="post-category btn-common rounded px-2 py-1 text-white">{{category.name}}</span>
+                                    <h3 class="entry-title text-uppercase mt-2">{{article.title}}</h3>
                                     <div class="post-meta">
-                                        <span class="byline">BY <a href="#" title="Indesign">{{article.author}}</a></span>
+                                        <span>By </span><span class="byline font-weight-bold"> {{article.author}}</span>
                                         <span class="post-date"> {{article.updatedAt}}</span>
                                     </div>
                                 </div>								
-                                <p>{{article.content}}</p>                               
+                                <p class="mt-3 mb-5">{{article.content}}</p>                               
                             </div>
                         </article>                    
                         <!-- Comment Area -->
-                        <div class="comments-area">
+                        <div class="comments-area ">
                             <h2 class="comments-title font-weight-bold">Comments</h2>
                             <ol class="comment-list">
                                 {% for comment in comments %}                            
@@ -84,7 +84,9 @@
     </main>
 		
 </div>
-	
+{% endblock %}	
 
+{% block footer %}
 {% include "footer.twig" %}
+{% endblock %}
 

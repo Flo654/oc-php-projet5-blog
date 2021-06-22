@@ -14,7 +14,7 @@ class  BackRender
     
     public function __construct()
     {
-        $this->twig = new Environment (new FilesystemLoader('../app/views'));
+        $this->twig = new Environment (new FilesystemLoader(['../app/views/layout','../app/views/back', '../app/views/components', '../app/views/components/modals components','../app/views/components/errors components',]));
         $this->auth = new Auth();
         $this->isAdmin = $this->auth->checkIfIsAdmin();
     }
@@ -32,7 +32,7 @@ class  BackRender
 
     public function admin()
     {                
-        (!$this->isAdmin) ? $this->printe($this->twig->render('404.twig', ['isConnected'=> $this->isAdmin['isConnected'] ])) : $this->printe($this->twig->render('backlayout.twig', ['isConnected'=> $this->isAdmin['isConnected'] , 'username' => $this->isAdmin['username'], 'isAdmin' => $this->isAdmin['isAdmin']]));
+        (!$this->isAdmin['isAdmin']) ? $this->printe($this->twig->render('404.twig', ['isConnected'=> $this->isAdmin['isConnected'] ])) : $this->printe($this->twig->render('backhome.twig', ['isConnected'=> $this->isAdmin['isConnected'] , 'username' => $this->isAdmin['username'], 'isAdmin' => $this->isAdmin['isAdmin']]));
          return; 
     }
 

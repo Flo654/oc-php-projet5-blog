@@ -17,13 +17,17 @@
                             <h6 class="card-title font-weight-bold text-uppercase mt-4 mb-2">Comment to valide</h6>
                             <div class=" d-flex justify-content-between">
                                 <p class="mr-3 text-muted">{{comment.content}}</p>
+                                                      
+                            </div>
+                            <hr>
+                            <div class=" d-flex float-right">
                                 <form class="" method="post" action='/admin/comments'>
                                     <input id="commentId" name="commentId" type="hidden" value="{{comment.commentId}}">
                                     <button  type="submit" name="submit" value="validateComment" class="submit"><i class="stylo fas fa-check text-success"></i></button>
                                     <a href="" data-toggle="modal" data-target="#confirmModal2" data-whatever="{{comment.commentId}}"><i class="trash fas fa-trash" ></i></a>                      
-                                </form>                       
-                            </div>
-                            <hr>                        
+                                </form>
+                            </div> 
+                                                    
                         </div>            
                     </div>
                 </div>

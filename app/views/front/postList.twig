@@ -1,0 +1,108 @@
+{% extends "layout.twig" %}
+
+{% block navbar %}
+    {% include "navbarBlog.twig" %}
+{% endblock %}
+
+{% block content %}
+<style>
+.card-big-shadow {
+    max-width: 320px;
+    position: relative;
+}
+
+
+.carde {
+    
+    box-shadow: 0 2px 2px rgba(204, 197, 185, 0.5);
+    background-color: #FFFFFF;
+    color: #252422;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+
+
+.carde .content {
+    padding: 20px 20px 10px 20px;
+}
+
+.carde .category, .card .label {
+    font-size: 14px;
+    margin-bottom: 0px;
+}
+.card-big-shadow:before {
+    background-image: url("http://static.tumblr.com/i21wc39/coTmrkw40/shadow.png");
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    bottom: -12%;
+    content: "";
+    display: block;
+    left: -12%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 0;
+}
+
+.carde .description {
+    font-size: 16px;
+    color: #66615b;
+}
+.content-card{
+    margin-top:30px;    
+}
+a:hover, a:focus {
+    text-decoration: none;
+}
+
+/*======== COLORS ===========*/
+.carde[data-color="blue"] {
+    background: #7a9e9f;
+}
+
+.carde[data-color="green"] {
+    background: #d5e5a3;
+}
+
+.carde[data-color="brown"] {
+    background: #d6c1ab;
+}
+
+.carde[data-color="purple"] {
+    background: #baa9ba;
+}
+
+.size {
+    font-size: 1rem
+}
+
+</style>
+<div class="container topp">
+<h2 class="section-title text-uppercase">my blog posts</h2>
+<div class="row">
+    {% for article in articles %} 
+    <div class="col-md-4 col-sm-6 content-card">
+        <div class="card-big-shadow">
+            <div class="carde "  data-color="{{article.imgUrl}}" data-radius="none">
+                
+                <div class="content">
+                    <h6 class="category bg-white d-inline text-secondary px-1 py-1 rounded ">{{article.author}}</h6>
+                    <h6 class="category mb-1 font-italic text-white mt-2">Publié le: {{article.updatedAt}}</h6>
+                    <h4 class="size text-uppercase text-white">{{article.title}}</h4>
+                    <p class="description">{{article.chapo}}</p>
+                    <a href="/blog/article-{{article.articleId}}"<button class =" btn btn-secondary mt-5">see more..</button></a>
+                </div>
+            </div> <!-- end card -->
+        </div>
+    </div>
+    
+   {% endfor %}
+</div>
+</div>
+{% endblock %}
+{% block footer %}
+{% include "footer.twig" %}
+{% endblock %}

@@ -8,15 +8,13 @@ use App\controllers\Auth;
 use App\controllers\BackRender;
 use App\controllers\Comment;
 use App\controllers\FrontRender;
-use App\controllers\Render;
 use App\controllers\Message;
 use App\controllers\User;
 
-$whoops = new \Whoops\Run;
-$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-$whoops->register();
 
 session_start();
+
+
 
 $frontRender = new FrontRender;
 $backRender = new BackRender;
@@ -25,8 +23,7 @@ try {
     $submit = filter_input(INPUT_POST,('submit'));
     switch ($submit) {
         case 'signIn':
-            $auth = new Auth;
-            $auth->session();
+            (new Auth)->session();
             header("Refresh: 0");
             break;
         
@@ -37,11 +34,11 @@ try {
             break;
 
         case 'signUp':
-            $model = new User();
-            $model->createUser();
+            (new User)->createUser();
             break;
         
         case 'createArticle':
+            
             $model = new Article();
             $model->createArticle();                    
             break;
@@ -93,31 +90,37 @@ try {
         $matchUri = $matches;
         $articleId = $matches[2];
         $uri = 'blog/article-{id}';
-        $render->singlePost($articleId);
+        $frontRender->singlePost($articleId);
         return;
     }
     $matchArticleUri = preg_match('%(admin/update/article-)([0-9]+)%', $uri, $matches);
     if ($matchArticleUri){
         $matchUri = $matches;
         $articleId = $matches[2];
-        $uri = 'blog/article-{id}';
-        $render->modifyController($articleId);
-        return;
+        $uri = 'admin/update/article-{id}';        
+        return $backRender->modifyController($articleId);
     }
-    if ($uri === 'home'){        
-        $frontRender->display('home');
-        return;
+    if ($uri === '' || $uri === 'home'){        
+        return $frontRender->display('home');
     }
+
     if ($uri ==='blog'){        
-        $frontRender->blog();
+        return $frontRender->blog();
+    }
+
+    if ($uri === 'contact'){
+        return $frontRender->display('contact');
+    }
+    if ($uri === 'checkModal'){
+        $frontRender->display('checkModal');
         return;
     }
-    if ($uri === 'contact'){
-        $frontRender->display('contact');
+    if ($uri === 'createModal'){
+        $frontRender->display('createModal');
         return;
     }
     if ($uri === 'admin'){
-        $render->admin();
+        $backRender->admin();
         return;
     }
     if ($uri === 'admin/article/create'){
