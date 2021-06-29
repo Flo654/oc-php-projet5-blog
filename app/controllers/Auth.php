@@ -9,12 +9,9 @@ use Exception;
 
 class Auth
 { 
-    private static function instance()
-    {
-        return new GetGlobals;
-    }
+   
     
-    private function auth()
+    public function auth()
     {        
         $password = filter_input(INPUT_POST,"password"); 
         $email = filter_input(INPUT_POST,"email");
@@ -24,45 +21,30 @@ class Auth
         if(!$user){
             throw new Exception("impossible to load data !!");
         }
-
-        if(session_status() === PHP_SESSION_NONE){
-            session_start();
-        }
-        return $user ?? null;
-    }
-
-    public function session () {
-        $user = $this->auth();   
-        if ($user == null){return;}
-        self::instance()->setSession('user', $user);
-        self::instance()->setSession('isConnected', true);
         
-        return self::instance()->getVariables();
+        setcookie('user', $user->username);
+        setcookie('isAdmin', $user->isAdmin);
+        setcookie('isConnected', true);
+        return; 
     }
+
 
     public function logout()
     {
-        if(session_status() !== PHP_SESSION_NONE)
-        {
-            session_destroy();
-        }
-        
-        return false;
+        setcookie("user", "", time() - 3600);
+        setcookie("isAdmin", "", time() - 3600);
+        setcookie("isConnected", "", time() - 3600);
+        return ;
     }
 
 
-    public function checkIfIsAdmin()
+    public function getCookiesData()
     {
+            $username =  filter_input(INPUT_COOKIE, 'user');
+            $isAdmin = filter_input(INPUT_COOKIE, 'isAdmin');
+            $isConnected = filter_input(INPUT_COOKIE, 'isConnected');    
         
-        $test = self::instance()->getVariables();
-        if ($test){
-            $username = $test['user']->username;
-            $isAdmin = $test['user']->isAdmin;
-            $isConnected = $test['isConnected'];
-            
-        }
-        
-        return (!$test) ?  false : ['username' => $username, 'isAdmin' => $isAdmin, 'isConnected' => $isConnected];
+        return  ['username' => $username, 'isAdmin' => $isAdmin, 'isConnected' => $isConnected];
     }
 
 }

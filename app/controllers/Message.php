@@ -15,7 +15,7 @@ class Message
     private function transport($name, $email, $subject, $content){
 
         // Create the Transport
-        $transport = (new Swift_SmtpTransport('smtp.gmail.com', 587, 'tls'))
+        $transport = (new Swift_SmtpTransport( SMTP, PORT, PROTOCOL))
         ->setUsername(EMAIL)
         ->setPassword(PASSWORD)
         ;

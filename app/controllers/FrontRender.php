@@ -2,6 +2,7 @@
 namespace App\controllers;
 use App\controllers\Article;
 use Twig\Environment;
+use Twig\Extra\Intl\IntlExtension;
 use Twig\Loader\FilesystemLoader;
 
 
@@ -15,8 +16,9 @@ class  FrontRender
     public function __construct()
     {
         $this->twig = new Environment (new FilesystemLoader(['../app/views/layout', '../app/views/components/modals components','../app/views/components/errors components','../app/views/front', '../app/views/front/components']));
+        $this->twig->addExtension(new IntlExtension());
         $this->auth = new Auth();
-        $this->isAdmin = $this->auth->checkIfIsAdmin();
+        $this->isAdmin = $this->auth->getCookiesData();
     }
    
     ////////////////////////////////////////////////////////
@@ -33,6 +35,7 @@ class  FrontRender
         $this->printe($this->twig->render("$page.twig", ['isConnected'=> $this->isAdmin['isConnected'], 'username' => $this->isAdmin['username'], 'isAdmin' => $this->isAdmin['isAdmin']]));
         return;
     }
+    
     public  function errorPage()
     {        
         $this->printe( $this->twig->render('404.twig', ['isConnected'=> $this->isAdmin['isConnected'] ]));

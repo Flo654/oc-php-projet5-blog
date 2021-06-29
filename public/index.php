@@ -12,24 +12,22 @@ use App\controllers\Message;
 use App\controllers\User;
 
 
-session_start();
-
-
 
 $frontRender = new FrontRender;
 $backRender = new BackRender;
 
+//POST routes
 try {
     $submit = filter_input(INPUT_POST,('submit'));
     switch ($submit) {
+        
         case 'signIn':
-            (new Auth)->session();
+            (new Auth)->auth();
             header("Refresh: 0");
             break;
         
         case 'logout':
-            $auth = new Auth;
-            $auth->logout(); 
+            (new Auth)->logout(); 
             header("Refresh: 0");                
             break;
 
@@ -38,40 +36,32 @@ try {
             break;
         
         case 'createArticle':
-            
-            $model = new Article();
-            $model->createArticle();                    
+            (new Article)->createArticle();                    
             break;
 
         case 'createComment':                    
-            $model = new Comment();
-            $model->insertComment();                    
+            (new Comment)->insertComment();                    
             break;
 
         case 'modifyArticle':                    
-            $model = new Article();
-            $model->updateArticle();                   
+            (new Article)->updateArticle();                   
             break; 
 
         case 'deleteArticle':                    
-            $model = new Article();
-            $model->deleteArticle();                   
+            (new Article)->deleteArticle();                   
             break; 
 
         case 'validateComment':                                      
-            $model = new Comment;
-            $model->valideComment();                                  
+            (new Comment)->valideComment();                                  
             break;
         
         case 'deleteComment':                                      
-            $model = new Comment;
-            $model->deleteComment();                                  
+            (new Comment)->deleteComment();                                  
             break;
 
         case 'postMessage':
             include '../credential.php' ;          
-            $message = new Message;
-            $message->sendMessage();
+            (new Message)->sendMessage();
             break;
     }
 } catch (Exception $e) {
@@ -82,7 +72,7 @@ try {
 
 }
 
-
+// GET routes
 try {
     $uri = trim(filter_input(INPUT_SERVER,"REQUEST_URI"),'/');    
     $matchBlogUri = preg_match('%(blog/article-)([0-9]+)%', $uri, $matches);    
@@ -93,6 +83,7 @@ try {
         $frontRender->singlePost($articleId);
         return;
     }
+
     $matchArticleUri = preg_match('%(admin/update/article-)([0-9]+)%', $uri, $matches);
     if ($matchArticleUri){
         $matchUri = $matches;
@@ -100,6 +91,7 @@ try {
         $uri = 'admin/update/article-{id}';        
         return $backRender->modifyController($articleId);
     }
+
     if ($uri === '' || $uri === 'home'){        
         return $frontRender->display('home');
     }
@@ -111,30 +103,36 @@ try {
     if ($uri === 'contact'){
         return $frontRender->display('contact');
     }
+
     if ($uri === 'checkModal'){
         $frontRender->display('checkModal');
         return;
     }
+
     if ($uri === 'createModal'){
-        $frontRender->display('createModal');
-        return;
+        return $frontRender->display('createModal');
     }
+
+    if ($uri === 'articleConfirmMessage'){
+        return $frontRender->display('articleConfirmMessage');
+    }
+
     if ($uri === 'admin'){
-        $backRender->admin();
-        return;
+        return $backRender->admin();
     }
+
     if ($uri === 'admin/article/create'){
-        $backRender->article();
-        return;
+        return $backRender->article();
     }
+
     if ($uri === 'admin/postList'){
-        $backRender->adminPostList();
-        return;
+        return  $backRender->adminPostList();
     }
+
     if ($uri === 'admin/comments'){
-        $backRender->commentController();
-        return;
+        return $backRender->commentController();
     }
+
     throw new Exception("Not Found !!", 404);
    
 

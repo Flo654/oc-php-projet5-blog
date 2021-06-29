@@ -11,7 +11,7 @@ class Article
     public function showArticles()
     {
         $modelArticle = new ModelsArticle();
-        $action = "ORDER BY  updatedAt DESC";
+        $action = "ORDER BY  createdAt DESC";
         $articles = $modelArticle->findAll($action);
         if(!$articles){
             throw new Exception("impossible to load data !!");
@@ -83,14 +83,14 @@ class Article
             throw new Exception("no postId filled !!");
         } 
         //recupérer les champs modifier
-        $author = filter_input(INPUT_POST, 'author', FILTER_SANITIZE_STRING);
-        $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
+        $author = filter_input(INPUT_POST, 'author');
+        $title = filter_input(INPUT_POST, 'title');
         $chapo = filter_input(INPUT_POST, 'chapo');
-        $content = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_STRING);
+        $content = filter_input(INPUT_POST, 'content');
         $categoryId = (int)filter_input(INPUT_POST, 'category');
         $readTime = (int)filter_input(INPUT_POST, 'readTime');
-        $articleImage = filter_input(INPUT_POST, 'uploadImage', FILTER_SANITIZE_STRING);
-        $imgUrl = "/assets/img/gallery/$articleImage";
+        $imgUrl = filter_input(INPUT_POST, 'uploadImage');
+        
          //on verifie que les champs soient bien remplis         
         if (!$author || !$title || !$chapo || !$content || !$readTime) {            
             throw new Exception( "please fill all the fields !! ");

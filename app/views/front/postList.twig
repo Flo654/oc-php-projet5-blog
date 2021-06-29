@@ -75,6 +75,10 @@ a:hover, a:focus {
     background: #baa9ba;
 }
 
+.carde[data-color="orange"] {
+    background: #fbc3a5;
+}
+
 .size {
     font-size: 1rem
 }
@@ -90,7 +94,7 @@ a:hover, a:focus {
                 
                 <div class="content">
                     <h6 class="category bg-white d-inline text-secondary px-1 py-1 rounded ">{{article.author}}</h6>
-                    <h6 class="category mb-1 font-italic text-white mt-2">Publié le: {{article.updatedAt}}</h6>
+                    <h6 class="category mb-1 font-italic text-white mt-2">Publié le:  {{article.createdAt | format_datetime('long', 'medium', locale='fr') }}</h6>
                     <h4 class="size text-uppercase text-white">{{article.title}}</h4>
                     <p class="description">{{article.chapo}}</p>
                     <a href="/blog/article-{{article.articleId}}"<button class =" btn btn-secondary mt-5">see more..</button></a>

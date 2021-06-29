@@ -16,7 +16,7 @@ class  BackRender
     {
         $this->twig = new Environment (new FilesystemLoader(['../app/views/layout','../app/views/back', '../app/views/components', '../app/views/components/modals components','../app/views/components/errors components',]));
         $this->auth = new Auth();
-        $this->isAdmin = $this->auth->checkIfIsAdmin();
+        $this->isAdmin = $this->auth->getCookiesData();
     }
    
  
