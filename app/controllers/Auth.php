@@ -2,14 +2,15 @@
 
 namespace App\controllers;
 
-use App\controllers\superGlobals\GetGlobals;
 use App\models\User;
-use App\SuperGlobals;
 use Exception;
 
 class Auth
 { 
-   
+   private function setCookies($item, $value, $time = NULL)
+   {
+        setcookie($item,$value,$time);
+   }
     
     public function auth()
     {        
@@ -21,19 +22,19 @@ class Auth
         if(!$user){
             throw new Exception("impossible to load data !!");
         }
-        
-        setcookie('user', $user->username);
-        setcookie('isAdmin', $user->isAdmin);
-        setcookie('isConnected', true);
+              
+        $this->setCookies('user', $user->username);
+        $this->setCookies('isAdmin', $user->isAdmin);
+        $this->setCookies('isConnected', true);        
         return; 
     }
 
 
     public function logout()
     {
-        setcookie("user", "", time() - 3600);
-        setcookie("isAdmin", "", time() - 3600);
-        setcookie("isConnected", "", time() - 3600);
+        $this->setCookies("user", "", time() - 3600);
+        $this->setCookies("isAdmin", "", time() - 3600);
+        $this->setCookies("isConnected", "", time() - 3600);
         return ;
     }
 
