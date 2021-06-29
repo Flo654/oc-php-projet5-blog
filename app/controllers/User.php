@@ -83,7 +83,7 @@ class User {
         try {
             //vérifier que l'utilisateur est admin
             // recuperer l'id du user en GET
-             $userId = (int) filter_input(INPUT_GET, 'userId');
+            // $userId = (int) filter_input(INPUT_GET, 'userId');
             /*// verifier que l'userId à été passé en parametre
             if(!$userId){
                 throw new Exception("l'id du User n'a pas été passé en parametre");

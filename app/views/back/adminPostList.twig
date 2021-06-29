@@ -1,0 +1,37 @@
+{% extends "backlayout.twig" %}
+
+    
+ {% block navbar %} 
+    {% include "navbar.twig" %} 
+{% endblock %}                     
+{% block content %}
+
+<div class="container topp">
+    <div class="row mb-4">
+        {% for article in articles %}       
+        <div class="col-md-12 mx-auto mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bold text-uppercase">{{article.title}}</h5>
+                    <p class="card-text">{{article.chapo}}</p>
+                    <small class="text-muted font-italic">crée le {{article.updatedAt}} </small>
+                    
+                    <div class="d-flex justify-content-end">
+                        <a href="admin/update/article-{{article.articleId}}"><i class="stylo fas fa-pen mr-3"></i></a>
+                        <a href="" data-toggle="modal" data-target="#confirmModal" data-whatever="{{article.articleId}}"><i class="trash fas fa-trash" ></i></a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>  
+              
+        {% endfor %}  
+    </div>
+</div>
+{% include "modalConfirm.twig" %}
+{% endblock %}
+
+{% block footer %}
+{% include "footer.twig" %}
+
+{% endblock %}

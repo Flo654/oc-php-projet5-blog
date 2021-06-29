@@ -18,6 +18,8 @@
     },
     "require": {
         "symfony/dotenv": "^5.2",
-      "ext-pdo": "*"
+      "ext-pdo": "*",
+        "swiftmailer/swiftmailer": "6.0",
+        "twig/intl-extra": "^3.3"
     }
 }

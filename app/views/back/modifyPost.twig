@@ -1,0 +1,77 @@
+{% extends "backlayout.twig" %}
+
+{% block navbar %}
+{% include "navbar.twig" %}
+{% endblock %}
+
+{% block content %}
+<main class="site-main">       
+        <!-- Page Content -->
+        <div class="container-fluid no-left-padding no-right-padding page-content top">
+            <!-- Container -->
+            <div class="container">
+                <div class="contact-info">
+                    
+                    <div class="block-title">
+                        <h3>Modify your post</h3>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form class="row" method="post" action='/admin/postList'>
+                        <div class="col-md-6 form-group">
+                            <label for="input_title" class="ml-2 font-weight-bold text-uppercase">Title</label>
+                            <input type="text" class="form-control text-dark" value="{{article.title}}" name="title" id="input_title" required>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="input_author" class="ml-2 font-weight-bold text-uppercase">Author</label>
+                            <input type="text" class="form-control text-dark" value="{{article.author}}" name="author" id="input_author" required>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label for="input_chapo" class="ml-2 font-weight-bold text-uppercase">Chapo</label>
+                            <input type="text" class="form-control text-dark" value="{{article.chapo}}" name="chapo" id="input_chapo" required>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="input_category" class="ml-2 font-weight-bold text-uppercase">Category</label>
+                            <select class="form-control text-dark" id="input_category" name="category" value="{{category.name}}">
+                                {% for category in categories %}                          
+                                <option value = {{category.categoryId}}>{{category.name}}</option> 
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="input_readTime" class="ml-2 font-weight-bold text-uppercase">ReadTime</label>
+                            <input type="text" class="form-control text-dark" value="{{article.readTime}}" name="readTime" id="input_readTime" required>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label for="content" class="ml-2 font-weight-bold text-uppercase">Your message</label>
+                            <textarea class="form-control text-dark" placeholder="" rows="8" name="content" id="content" required>{{article.content}}</textarea>
+                        </div>
+                        <div class="form-group ml-3">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="inputGroupSelect01">Background color</label>
+                                </div>
+                                <select class="custom-select" id="inputGroupSelect01" name="uploadImage">
+                                    <option selected >blue</option>
+                                    <option value="green">green</option>
+                                    <option value="brown">brown</option>
+                                    <option value="orange">orange</option>
+                                    <option value="purple">purple</option>
+                                </select>
+                            </div>
+                        </div>
+                        <input id="articleId" name="articleId" type="hidden" value="{{article.articleId}}"> 
+                        <div class="col-md-12 form-group no-bottom-margin">
+                            <button type="submit" name="submit" value="modifyArticle" class="submit">Send</button>
+                        </div>
+                        <div id="alert-msg" class="alert-msg"></div>
+                    </form>
+                </div>
+            </div><!-- Container /- -->
+        </div><!-- Page Content /- -->	
+    </main>
+{% endblock %}
+
+{% block footer %}
+{% include "footer.twig" %}
+{% endblock %}

@@ -1,2 +1,4 @@
 /vendor/
 .env
+credential.php
+config.php

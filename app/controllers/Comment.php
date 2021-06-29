@@ -1,6 +1,7 @@
 <?php
 namespace App\controllers;
 
+use App\controllers\superGlobals\GetGlobals;
 use App\models\Comment as ModelsComment;
 use Exception;
 
@@ -14,7 +15,9 @@ class Comment {
     public function insertComment()
     {       
         //on recupere le userId dans $_SESSION
-        $userId = (int) $_SESSION['user']->userId;
+        //$userId = (int) $_SESSION['user']->userId;
+        $session = new GetGlobals;
+        $userId = (int) $session->getVariables('user')->userId;
         $articleId = (int)filter_input(INPUT_POST, 'articleId', FILTER_SANITIZE_NUMBER_INT);
         $content = filter_input(INPUT_POST, 'comment');               
         //on verifie que tous les champs sont bien remplis

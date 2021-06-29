@@ -1,83 +1,78 @@
 <?php
+
 require_once '../vendor/autoload.php';
+
 
 use App\controllers\Article;
 use App\controllers\Auth;
+use App\controllers\BackRender;
 use App\controllers\Comment;
-use App\controllers\Render;
-use App\controllers\Router;
+use App\controllers\FrontRender;
+use App\controllers\Message;
 use App\controllers\User;
 
-$whoops = new \Whoops\Run;
-$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-$whoops->register();
 
 
-session_start();
-//var_dump($_SERVER);exit;
+$frontRender = new FrontRender;
+$backRender = new BackRender;
 
-//$router = new Router;
-
-$render = new Render;
-
+//POST routes
 try {
     $submit = filter_input(INPUT_POST,('submit'));
     switch ($submit) {
+        
         case 'signIn':
-            Auth::auth();
+            (new Auth)->auth();
             header("Refresh: 0");
             break;
         
         case 'logout':
-            Auth::logout(); 
+            (new Auth)->logout(); 
             header("Refresh: 0");                
             break;
 
         case 'signUp':
-            $model = new User();
-            $model->createUser();
+            (new User)->createUser();
             break;
         
         case 'createArticle':
-            $model = new Article();
-            $model->createArticle();                    
+            (new Article)->createArticle();                    
             break;
 
         case 'createComment':                    
-            $model = new Comment();
-            $model->insertComment();                    
+            (new Comment)->insertComment();                    
             break;
 
         case 'modifyArticle':                    
-            $model = new Article();
-            $model->updateArticle();                   
+            (new Article)->updateArticle();                   
             break; 
 
         case 'deleteArticle':                    
-            $model = new Article();
-            $model->deleteArticle();                   
+            (new Article)->deleteArticle();                   
             break; 
 
         case 'validateComment':                                      
-            $model = new Comment;
-            $model->valideComment();                                  
+            (new Comment)->valideComment();                                  
             break;
         
         case 'deleteComment':                                      
-            $model = new Comment;
-            $model->deleteComment();                                  
+            (new Comment)->deleteComment();                                  
+            break;
+
+        case 'postMessage':
+            include '../credential.php' ;          
+            (new Message)->sendMessage();
             break;
     }
 } catch (Exception $e) {
 
     $errorMessage = $e->getMessage();
     $errorCode = $e->getCode();
-    $render = new Render;
-    $render->errorMessage($errorMessage, $errorCode); 
+    $frontRender->errorMessage($errorMessage, $errorCode); 
 
 }
 
-
+// GET routes
 try {
     $uri = trim(filter_input(INPUT_SERVER,"REQUEST_URI"),'/');    
     $matchBlogUri = preg_match('%(blog/article-)([0-9]+)%', $uri, $matches);    
@@ -85,82 +80,67 @@ try {
         $matchUri = $matches;
         $articleId = $matches[2];
         $uri = 'blog/article-{id}';
-        $render->singlePost($articleId);
+        $frontRender->singlePost($articleId);
         return;
     }
+
     $matchArticleUri = preg_match('%(admin/update/article-)([0-9]+)%', $uri, $matches);
     if ($matchArticleUri){
         $matchUri = $matches;
         $articleId = $matches[2];
-        $uri = 'blog/article-{id}';
-        $render->modifyController($articleId);
-        return;
+        $uri = 'admin/update/article-{id}';        
+        return $backRender->modifyController($articleId);
     }
-    if ($uri === 'home'){        
-        $render->home();
-        return;
+
+    if ($uri === '' || $uri === 'home'){        
+        return $frontRender->display('home');
     }
+
     if ($uri ==='blog'){        
-        $render->blog();
-        return;
+        return $frontRender->blog();
     }
+
     if ($uri === 'contact'){
-        $render->contact();
+        return $frontRender->display('contact');
     }
+
+    if ($uri === 'checkModal'){
+        $frontRender->display('checkModal');
+        return;
+    }
+
+    if ($uri === 'createModal'){
+        return $frontRender->display('createModal');
+    }
+
+    if ($uri === 'articleConfirmMessage'){
+        return $frontRender->display('articleConfirmMessage');
+    }
+
     if ($uri === 'admin'){
-        $render->admin();
-        return;
+        return $backRender->admin();
     }
+
     if ($uri === 'admin/article/create'){
-        $render->article();
-        return;
+        return $backRender->article();
     }
+
     if ($uri === 'admin/postList'){
-        $render->adminPostList();
-        return;
+        return  $backRender->adminPostList();
     }
+
     if ($uri === 'admin/comments'){
-        $render->commentController();
-        return;
+        return $backRender->commentController();
     }
+
     throw new Exception("Not Found !!", 404);
-    
-    /* ////////////////////////////////////////////////////////
-    /////////////////////// ROUTES//////////////////////////
-    ////////////////////////////////////////////////////////
-
-    $router->post('signIn', 'loginController');
-    $router->post('signUp', 'createUserController');
-    $router->post('logout', 'createUserController');
-    $router->post('createArticle', 'CreateArticleController');
-    $router->post('createComment', 'CreateCommentController');
-    $router->post('modifyArticle', 'modifyCommentController');//modify
-    $router->post('validateComment', 'validateComment');//modify
-    $router->post('deleteComment', 'deleteComment');//delete
-
-    ////////////////FRONT OFFICE ROUTE//////////////////////
-
-    $router->get('/home', 'homeController');
-    $router->get('/blog', 'postListController');
-    $router->get('/blog/article-:id', 'singlePostController');
-    $router->get('/contact', 'contactController');
-
-    ////////////////BACK OFFICE ROUTE///////////////////////
-    ////////////////////////////////////////////////////////
-
-    $router->get('/admin', 'adminController');
-    $router->get('/admin/article/create', 'articleController');    
-    $router->get('/admin/comments', 'commentsController');
-    $router->get('/admin/postList', 'adminPostList');
-    $router->get('/backArticle-:id', 'modifyController');//modify
-    $router->get('/deleteArticle-:id', 'deleteController');//delete */
+   
 
 } catch (Exception $e) {
 
      $errorMessage = $e->getMessage();
      $errorCode = $e->getCode();
-     $render = new Render;
-     $render->errorMessage($errorMessage, $errorCode); 
+     $frontRender->errorMessage($errorMessage, $errorCode); 
 
 }
 

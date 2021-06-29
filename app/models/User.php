@@ -20,7 +20,7 @@ class User extends Model
         $result = $this->pdo->prepare($sql);
         $result->execute(['username'=> $username, 'email'=> $email]);
         $data = $result->fetch();
-        return (!$data->email and !$data->username) ? true : false;
+        return (!$data) ? true : false;
     }
 
     /**

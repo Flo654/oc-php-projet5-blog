@@ -1,0 +1,99 @@
+{% extends "backlayout.twig" %}
+
+{% block navbar %}
+{% include "navbar.twig" %}
+{% endblock %}
+{% block content %}
+{% if isAdmin %}
+
+<!-- Services Section Start -->
+    <section id="services" class=" section-padding top  ">
+     
+        <div class="container  bot">
+            <div class="row ">
+                 <!-- Services item -->
+                <div class="col-md-6 col-lg-6 col-xs-12">
+                    <div class="services-item wow fadeInDown" data-wow-delay="1.2s">
+                    <div class="icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="services-content">
+                        <h3><a href="/home">back to blog</a></h3>
+                        
+                    </div>
+                    </div>
+                </div>
+                <!-- Services item -->
+                <div class="col-md-6 col-lg-6 col-xs-12 mb-4">
+                    <div class="services-item ">
+                    <div class="icon">
+                        <i class="fas fa-folder-plus"></i>
+                    </div>
+                    <div class="services-content">
+                        <h3><a href="admin/article/create">create article</a></h3>
+                        
+                    </div>
+                    </div>
+                </div>
+                <!-- Services item -->
+                <div class="col-md-6 col-lg-6 col-xs-12 mb-4">
+                    <div class="services-item wow fadeInDown" data-wow-delay="0.6s">
+                    <div class="icon">
+                        <i class="far fa-newspaper"></i>
+                    </div>
+                    <div class="services-content">
+                        <h3><a href="/admin/postList">Manage posts</a></h3>
+                        
+                    </div>
+                    </div>
+                </div>           
+
+                <!-- Services item -->
+                <div class="col-md-6 col-lg-6 col-xs-12 mb-4">
+                    <div class="services-item wow fadeInDown" data-wow-delay="0.9s">
+                    <div class="icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="services-content">
+                        <h3><a href="/admin/comments">Manage comments</a></h3>                    
+                    </div>
+                    </div>
+                </div>
+                <!-- Services item -->
+                <div class="col-md-6 col-lg-6 col-xs-12 mb-4">
+                    <div class="services-item wow fadeInDown" data-wow-delay="0.9s">
+                    <div class="icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="services-content">
+                        <h3><a href="/admin">Manage users (not active)</a></h3>                    
+                    </div>
+                    </div>
+                </div>
+                <!-- Services item -->
+                <div class="col-md-6 col-lg-6 col-xs-12">
+                    <div class="services-item wow fadeInDown" data-wow-delay="1.2s">
+                    <div class="icon">
+                        <i class="fas fa-angle-double-right"></i>
+                    </div>
+                    <div class="services-content">
+                        <h3><a href="">insert new category (not active)</a></h3>
+                        
+                    </div>
+                    </div>
+                </div>
+               
+            
+            
+            
+            
+            
+            </div>
+        </div>
+    </section>
+    <!-- Services Section End -->
+{% endif %}
+{% endblock %}
+{% block footer %}
+{% include "footer.twig" %}
+{% endblock %}
