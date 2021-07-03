@@ -42,7 +42,7 @@
                                                 <b class="fn">{{comment.username}}</b>
                                             </div>
                                             <div class="comment-metadata">
-                                                <a href="#">{{comment.createdAt}}</a>											
+                                                <a href="#">Le {{comment.createdAt | format_datetime('long', 'medium', locale='fr')}}</a>											
                                             </div>
                                         </footer>
                                         <div class="comment-content">
@@ -57,7 +57,7 @@
                             {% if isConnected %}
                             <div class="comment-respond">                            
                                 <h2 class="comment-reply-title">Leave a Reply</h2>
-                                <form method="post" class="comment-form" action=''>                                        
+                                <form method="post" class="comment-form" action='/articleConfirmMessage'>                                        
                                     <p class="comment-form-comment">
                                         <textarea id="comment" name="comment" placeholder="Enter your comment here..." rows="8" required></textarea>
                                     </p>

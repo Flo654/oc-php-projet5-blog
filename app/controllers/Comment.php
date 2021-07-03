@@ -1,7 +1,7 @@
 <?php
 namespace App\controllers;
 
-use App\controllers\superGlobals\GetGlobals;
+
 use App\models\Comment as ModelsComment;
 use Exception;
 
@@ -16,8 +16,8 @@ class Comment {
     {       
         //on recupere le userId dans $_SESSION
         //$userId = (int) $_SESSION['user']->userId;
-        $session = new GetGlobals;
-        $userId = (int) $session->getVariables('user')->userId;
+        
+        $userId = (int) filter_input(INPUT_COOKIE, 'userId');
         $articleId = (int)filter_input(INPUT_POST, 'articleId', FILTER_SANITIZE_NUMBER_INT);
         $content = filter_input(INPUT_POST, 'comment');               
         //on verifie que tous les champs sont bien remplis
@@ -31,17 +31,15 @@ class Comment {
     }    
 
        
-    public function getComments()
+  /*   public function getComments()
     {
-        
-        //verifier que l'utilisateur qui efface le commentaire est admin
         $commentModel = new ModelsComment();
         $action = " ORDER BY articleId ASC";
         $comments = $commentModel->findAll($action);
         if(!$comments){
             throw new Exception("impossible to load data");
         }       
-    }
+    } */
     
     public function deleteComment()
     {

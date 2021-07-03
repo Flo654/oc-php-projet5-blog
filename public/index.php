@@ -60,7 +60,7 @@ try {
             break;
 
         case 'postMessage':
-            include '../credential.php' ;          
+            include '../config.php' ;          
             (new Message)->sendMessage();
             break;
     }

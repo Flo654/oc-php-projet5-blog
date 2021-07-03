@@ -25,6 +25,7 @@ class Auth
               
         $this->setCookies('user', $user->username);
         $this->setCookies('isAdmin', $user->isAdmin);
+        $this->setCookies('userId', $user->userId);
         $this->setCookies('isConnected', true);        
         return; 
     }
