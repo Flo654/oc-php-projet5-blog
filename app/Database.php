@@ -4,11 +4,9 @@ namespace App;
 
 use PDO;
 use PDOException;
-use Symfony\Component\Dotenv\Dotenv;
+
 include '../config.php';
 
-$dotenv = new Dotenv();
-$dotenv->load(__DIR__.'/../.env');
 
 /**
  * connection to Database class
