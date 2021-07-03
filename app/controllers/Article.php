@@ -34,7 +34,7 @@ class Article
             throw new Exception("this post with this Id doesn't exist !!");
         }        
         //on recupère les commentaires associé à l'article qui ont été validé
-        $sqlOption = " WHERE articleId = $articleId AND isValid = 1";            
+        $sqlOption = " WHERE articleId = $articleId AND isValid = 1 ORDER BY createdAt DESC";            
         $comments = $commentModel->findAll($sqlOption);
         
         // require la vue pour afficher les articles
