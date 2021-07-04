@@ -5,9 +5,9 @@
 ## Creation of a responsive blog in PHP OOP without framework
 
 The project has been done with versions of :
-* MYSQL 8.0.23
-* PHP 7.4.9
-* APACHE 2.4.46
+*   MYSQL 8.0.23
+*   PHP 7.4.9
+*   APACHE 2.4.46
 
 you need to have composer installed (if not: https://getcomposer.org/download/)
 
