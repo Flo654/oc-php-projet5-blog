@@ -6,8 +6,8 @@
 
 The project has been done with versions of :
 * MYSQL 8.0.23
-  * PHP 7.4.9
-  * APACHE 2.4.46
+* PHP 7.4.9
+* APACHE 2.4.46
 
 you need to have composer installed (if not: https://getcomposer.org/download/)
 
@@ -15,9 +15,8 @@ you need to have composer installed (if not: https://getcomposer.org/download/)
 
 ### Step one: installing the repository
 
-  * Clone this repo on your:computer:
-
-  * from the root :file_folder: `OC-PHP-PROJECT5-BLOG`. use  `composer install` , to load all dependancies. 
+* Clone this repo on your:computer:
+* from the root :file_folder: `OC-PHP-PROJECT5-BLOG`. use  `composer install` , to load all dependancies. 
 
 ### Step two: importing the database
 
