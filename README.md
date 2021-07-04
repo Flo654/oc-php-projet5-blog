@@ -59,8 +59,8 @@ Now you have to modify `config.example.php` with your SMTP server login credenti
  ## :gear: LANCEMENT DU PROJET
 
 *   To run the projet, from the root :file_folder: `OC-PHP-PROJECT5-BLOG` , open a terminal and enter this command : `php -S localhost:8000 -t public`.
-*  Follow the link and ....enjoy !! <br/>
-To connect as admin you can use `admin@admin.com` as email and `admin123` as password.
+*   Follow the link and ....enjoy !! 
+*   To connect as admin you can use `admin@admin.com` as email and `admin123` as password.
 
 
 
