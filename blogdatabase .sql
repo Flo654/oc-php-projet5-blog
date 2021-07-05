@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : sam. 03 juil. 2021 à 13:10
+-- Généré le : lun. 05 juil. 2021 à 08:56
 -- Version du serveur :  8.0.23
 -- Version de PHP : 7.4.9
 
@@ -95,9 +95,9 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `createdAt` datetime NOT NULL,
   `updatedAt` date NOT NULL,
   PRIMARY KEY (`commentId`),
-  KEY `userId` (`userId`),
-  KEY `comment_ibfk_2` (`articleId`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `comment_ibfk_2` (`articleId`),
+  KEY `comment_ibfk_1` (`userId`)
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `comment`
@@ -110,7 +110,9 @@ INSERT INTO `comment` (`commentId`, `userId`, `articleId`, `content`, `isValid`,
 (18, 1, 10, 'c\'est un article interressant !!!', 1, '2021-06-15 11:52:26', '2021-06-15'),
 (21, 1, 1, 'ceci est un commentaire !!', 1, '2021-06-17 10:38:53', '2021-06-17'),
 (23, 1, 1, 'ceci est un commentaire d\'aujourdhui !!', 1, '2021-06-17 17:52:31', '2021-06-29'),
-(24, 1, 1, 'waou !! c\'est genial !!', 0, '2021-06-18 05:02:09', '2021-06-18');
+(24, 1, 1, 'waou !! c\'est genial !!', 0, '2021-06-18 05:02:09', '2021-06-18'),
+(25, 8, 26, 'je laisse un commentaire de ouf !!!', 1, '2021-07-03 15:23:36', '2021-07-03'),
+(26, 8, 26, 'second commentaire laissé', 0, '2021-07-03 15:30:22', '2021-07-03');
 
 -- --------------------------------------------------------
 
@@ -128,16 +130,16 @@ CREATE TABLE IF NOT EXISTS `user` (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `user`
 --
 
 INSERT INTO `user` (`userId`, `username`, `email`, `password`, `isAdmin`, `createdAt`, `updatedAt`) VALUES
-(1, 'admin', 'admin@admin.com', 'admin', 1, '2021-06-09 09:38:54', '2021-06-09 09:38:54'),
+(1, 'flo654', 'flo654@hotmail.com', '123456', 1, '2021-06-09 09:38:54', '2021-06-09 09:38:54'),
 (2, 'bob1973', 'bob@bob.com', '$2y$10$Flu.oxF.cH3pic5hqdRN5uN9L5q8o71c8bpOJGG3GnDPj5rqYiXuC', 0, '2021-06-09 16:10:44', '2021-06-09 16:10:44'),
-(7, 'paul123', 'paul@paul.com', '$2y$10$CWUmp1b4me91xcBQRvbE/.gjqd/QUtR4sxjfsWYDBcdtpykgHMyVG', 0, '2021-06-23 09:08:16', '2021-06-23 09:08:16');
+(8, 'admin', 'admin@admin.com', '$2y$10$4kAGChbBjbnAZRe8trI./u1ZAxLmoHZkMxetqI1Jw1MPo8h0/tQvq', 1, '2021-07-03 15:15:38', '2021-07-03 15:15:38');
 
 --
 -- Contraintes pour les tables déchargées
@@ -153,8 +155,8 @@ ALTER TABLE `article`
 -- Contraintes pour la table `comment`
 --
 ALTER TABLE `comment`
-  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`articleId`) REFERENCES `article` (`articleId`) ON DELETE CASCADE ON UPDATE RESTRICT;
+  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`) ON DELETE CASCADE ON UPDATE RESTRICT,
+  ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`articleId`) REFERENCES `article` (`articleId`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

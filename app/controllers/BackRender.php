@@ -32,6 +32,7 @@ class  BackRender
 
     public function admin()
     {                
+       
         (!$this->isAdmin['isAdmin']) ? $this->printe($this->twig->render('404.twig', ['isConnected'=> $this->isAdmin['isConnected'] ])) : $this->printe($this->twig->render('backhome.twig', ['isConnected'=> $this->isAdmin['isConnected'] , 'username' => $this->isAdmin['username'], 'isAdmin' => $this->isAdmin['isAdmin']]));
          return; 
     }
@@ -40,7 +41,8 @@ class  BackRender
     {
         $model2 = new Category(); 
         $categories = $model2->showCategory();
-        (!$this->isAdmin) ? $this->printe($this->twig->render('404.twig', ['isConnected'=> $this->isAdmin['isConnected'] ])) : $this->printe($this->twig->render('createMessage.twig', ['categories' => $categories, 'isConnected'=> $this->isAdmin['isConnected'],'username' => $this->isAdmin['username'], 'isAdmin' => $this->isAdmin['isAdmin']]));
+       
+        (!$this->isAdmin['isAdmin'] ) ? $this->printe($this->twig->render('404.twig', ['isConnected'=> $this->isAdmin['isConnected'] ])) : $this->printe($this->twig->render('createMessage.twig', ['categories' => $categories, 'isConnected'=> $this->isAdmin['isConnected'],'username' => $this->isAdmin['username'], 'isAdmin' => $this->isAdmin['isAdmin']]));
         return;
     }
 
@@ -48,7 +50,7 @@ class  BackRender
     {
         $model = new Article();
         $articles = $model->showArticles();
-        (!$this->isAdmin) ? $this->printe($this->twig->render('404.twig', ['isConnected'=> $this->isAdmin['isConnected']])) : $this->printe($this->twig->render('adminPostList.twig', ['articles' => $articles, 'isConnected'=> $this->isAdmin['isConnected'], 'username' => $this->isAdmin['username']]));
+        (!$this->isAdmin['isAdmin']) ? $this->printe($this->twig->render('404.twig', ['isConnected'=> $this->isAdmin['isConnected']])) : $this->printe($this->twig->render('adminPostList.twig', ['articles' => $articles, 'isConnected'=> $this->isAdmin['isConnected'], 'username' => $this->isAdmin['username']]));
         return;
     }
 
@@ -56,7 +58,7 @@ class  BackRender
     {
         $model = new Comment;
         $comments = $model->commentsList();
-        (!$this->isAdmin) ? $this->printe($this->twig->render('404.twig', ['isConnected'=> $this->isAdmin['isConnected'] ])) : $this->printe($this->twig->render('commentList.twig', ['isConnected'=> $this->isAdmin['isConnected'] , 'username' => $this->isAdmin['username'], 'isAdmin' => $this->isAdmin['isAdmin'], 'comments' => $comments]));
+        (!$this->isAdmin['isAdmin']) ? $this->printe($this->twig->render('404.twig', ['isConnected'=> $this->isAdmin['isConnected'] ])) : $this->printe($this->twig->render('commentList.twig', ['isConnected'=> $this->isAdmin['isConnected'] , 'username' => $this->isAdmin['username'], 'isAdmin' => $this->isAdmin['isAdmin'], 'comments' => $comments]));
          return; 
     }
 
@@ -66,7 +68,7 @@ class  BackRender
         $model2 = new Category();        
         $article = $model->showOneArticle($articleId);
         $categories = $model2->showCategory();
-        (!$this->isAdmin) ? $this->printe($this->twig->render('404.twig', ['isConnected'=> $this->isAdmin['isConnected']])) : $this->printe($this->twig->render('modifyPost.twig', ['article' => $article['article'],'categories' => $categories, 'isConnected'=> $this->isAdmin['isConnected'], 'username' => $this->isAdmin['username'], 'isAdmin' => $this->isAdmin['isAdmin']]));
+        (!$this->isAdmin['isAdmin']) ? $this->printe($this->twig->render('404.twig', ['isConnected'=> $this->isAdmin['isConnected']])) : $this->printe($this->twig->render('modifyPost.twig', ['article' => $article['article'],'categories' => $categories, 'isConnected'=> $this->isAdmin['isConnected'], 'username' => $this->isAdmin['username'], 'isAdmin' => $this->isAdmin['isAdmin']]));
         return;
     }
     
